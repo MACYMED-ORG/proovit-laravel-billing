@@ -45,6 +45,12 @@ The package calculates:
 
 Finalization locks the invoice number and moves the document out of draft state.
 
+## Web preview
+
+Invoices can also be rendered in the browser through the preview and print routes.
+
+See [Web preview and print](web-preview.md).
+
 ## Payments
 
 Payments are recorded separately and can be allocated to invoices later.

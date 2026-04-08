@@ -6,6 +6,7 @@ namespace Proovit\Billing\Http\Controllers\Web\Invoices;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Proovit\Billing\DTOs\Documents\InvoiceDocumentData;
 use Proovit\Billing\Models\Invoice;
 
 final class ShowSharedInvoiceController extends Controller
@@ -20,10 +21,10 @@ final class ShowSharedInvoiceController extends Controller
             })
             ->firstOrFail();
 
-        $invoice->loadMissing(['company.defaultBankAccount', 'company.defaultEstablishment', 'customer', 'establishment', 'reservation', 'series', 'lines.product', 'lines.taxRate', 'payments.allocations']);
-
-        return response()->view('billing::pdf.invoice', [
-            'invoice' => $invoice,
+        return response()->view('billing::web.invoices.preview', [
+            'document' => InvoiceDocumentData::fromInvoice($invoice)->toViewModel(),
+            'invoice_model' => $invoice,
+            'shared' => true,
         ]);
     }
 }

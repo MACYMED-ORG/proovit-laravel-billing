@@ -20,9 +20,9 @@ The API and public share links are disabled automatically in that mode.
 
 ## How do I generate a PDF without an Eloquent invoice?
 
-Build a draft DTO, calculate totals, then create an `InvoiceDocumentData` object.
+Use the fluent document builder to assemble the document step by step, or create a normalized `InvoiceDocumentData` object if you already have all fields ready.
 
-See [DTO-only mode](use-cases/dto-only.md).
+See [Document builder mode](use-cases/document-builder.md).
 
 ## Where are invoice files stored?
 

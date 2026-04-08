@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -13,6 +15,8 @@ use Illuminate\Support\Str;
  */
 abstract class BillingModel extends Model
 {
+    use HasFactory;
+
     protected static function booted(): void
     {
         static::creating(function (Model $model): void {
@@ -25,5 +29,22 @@ abstract class BillingModel extends Model
     public function getRouteKeyName(): string
     {
         return 'uuid_identifier';
+    }
+
+    /**
+     * @return Factory<static>|null
+     */
+    protected static function newFactory(): ?Factory
+    {
+        $factoryClass = 'Proovit\\Billing\\Database\\Factories\\'.class_basename(static::class).'Factory';
+
+        if (class_exists($factoryClass)) {
+            /** @var Factory<static> $factory */
+            $factory = $factoryClass::new();
+
+            return $factory;
+        }
+
+        return null;
     }
 }

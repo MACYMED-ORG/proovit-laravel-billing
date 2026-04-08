@@ -17,19 +17,53 @@ use Proovit\Billing\Actions\Invoices\GenerateInvoicePdfAction;
 $html = app(GenerateInvoicePdfAction::class)->handle($invoice);
 ```
 
-## Render from DTOs
+## Render from the fluent builder
+
+```php
+use Proovit\Billing\Actions\Invoices\GenerateInvoicePdfAction;
+use Proovit\Billing\Builders\Documents\InvoiceDocumentBuilder;
+use Proovit\Billing\DTOs\Documents\InvoiceDocumentData;
+
+$document = InvoiceDocumentBuilder::make()
+    ->withSeller([
+        'legal_name' => 'ProovIT SAS',
+        'display_name' => 'ProovIT',
+    ])
+    ->withCustomer([
+        'legal_name' => 'Client SARL',
+        'reference' => 'CLI-001',
+    ])
+    ->addLine([
+        'description' => 'Consulting services',
+        'quantity' => '1',
+        'unit_price' => '100.00',
+        'tax_rate' => '20',
+    ])
+    ->withNumber('INV-2026-0001')
+    ->withIssuedAt(now())
+    ->withDueAt(now()->addDays(30))
+    ->validate()
+    ->build();
+
+$html = app(GenerateInvoicePdfAction::class)->handle($document);
+```
+
+The package still accepts `InvoiceDocumentData` directly when you already have a normalized draft and totals.
+
+## Render from normalized DTOs
 
 ```php
 use Proovit\Billing\Actions\Invoices\GenerateInvoicePdfAction;
 use Proovit\Billing\DTOs\Documents\InvoiceDocumentData;
 
-$document = InvoiceDocumentData::fromDraft($draft, $totals, [
+$documentDto = InvoiceDocumentData::fromDraft($draft, $totals, [
     'number' => 'INV-2026-0001',
     'issued_at' => now(),
     'due_at' => now()->addDays(30),
+    'locale' => 'fr',
 ]);
 
-$html = app(GenerateInvoicePdfAction::class)->handle($document);
+$html = app(GenerateInvoicePdfAction::class)->handle($documentDto);
 ```
 
 ## Download or stream

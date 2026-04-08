@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Added optional database-backed and DTO-only billing modes
+- Added optional database-backed and fluent document builder billing modes
 - Added invoice PDF DTOs for offline rendering
 - Added configurable storage disk and directory for generated invoices
 - Added optional installer resource publication

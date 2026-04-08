@@ -111,6 +111,9 @@ return [
         'prefix' => 'billing',
         'middleware' => ['web'],
         'namespaced' => true,
+        'home' => true,
+        'preview' => true,
+        'print' => true,
     ],
 
     'docs' => [

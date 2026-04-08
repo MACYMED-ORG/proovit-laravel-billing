@@ -29,7 +29,7 @@ If your application already has a guard or middleware stack, use that instead:
 ],
 ```
 
-## DTO-only mode
+## Document builder mode
 
 When `billing.database.enabled` is `false`, the API is disabled automatically.
 
@@ -38,6 +38,7 @@ That is intentional:
 - there is no local data store to query
 - invoice sharing links cannot be resolved from the database
 - Scramble docs for the billing API are also disabled
+- the fluent document builder still works for offline PDF generation
 
 ## Public invoice sharing
 

@@ -7,6 +7,7 @@ Public invoice sharing is designed for read-only invoice access.
 - send a client a temporary read-only link
 - avoid exposing the entire API
 - provide a human-friendly invoice view outside your authenticated application
+- reuse the same browser preview UI as the internal invoice preview
 
 ## Example
 

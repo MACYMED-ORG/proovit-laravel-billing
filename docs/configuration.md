@@ -38,7 +38,7 @@ When `enabled` is `false`:
 - web billing routes are disabled
 - public invoice sharing is disabled
 - Scramble API docs are disabled
-- DTO-only document rendering remains available
+- fluent builder-based document rendering remains available
 
 ## API mode
 
@@ -110,7 +110,28 @@ Typical choices:
 
 The package exposes its own documentation path, so it does not overwrite the host application's docs.
 
-## Example: DTO-only configuration
+## Web routes
+
+```php
+'web' => [
+    'enabled' => true,
+    'prefix' => 'billing',
+    'middleware' => ['web'],
+    'namespaced' => true,
+    'home' => true,
+    'preview' => true,
+    'print' => true,
+],
+```
+
+The web stack gives you:
+
+- a package landing page
+- an authenticated invoice preview page
+- a print-friendly invoice page
+- a public shared invoice page when signed sharing is enabled
+
+## Example: builder-only configuration
 
 ```php
 config([

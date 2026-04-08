@@ -56,14 +56,14 @@ config([
 ]);
 ```
 
-## DTO-only mode
+## Document builder mode
 
 If you disable the database-backed stack:
 
 - API routes are disabled automatically
 - signed public sharing is disabled automatically
 - Scramble documentation is disabled automatically
-- PDF generation can still run from DTOs
+- PDF generation can still run from the fluent document builder or from normalized DTOs
 
 This mode is useful for:
 
@@ -91,6 +91,7 @@ config([
 3. Run your migrations if the database stack is enabled
 4. Configure Sanctum or your own middleware if the API is exposed
 5. Configure Scramble if you want API documentation
+6. Use the fluent document builder when you want to generate PDFs without local persistence
 
 ## Composer automation
 

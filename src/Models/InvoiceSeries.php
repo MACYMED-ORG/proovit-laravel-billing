@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property-read Company|null $company
+ * @property-read CompanyEstablishment|null $establishment
  * @property-read string|null $name
  * @property-read string|null $prefix
  * @property-read string|null $pattern
@@ -23,6 +24,11 @@ final class InvoiceSeries extends BillingModel
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class, 'company_id');
+    }
+
+    public function establishment(): BelongsTo
+    {
+        return $this->belongsTo(CompanyEstablishment::class, 'establishment_id');
     }
 
     public function reservations(): HasMany

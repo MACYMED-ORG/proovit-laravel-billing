@@ -28,7 +28,7 @@ The installer can:
 
 - enable Scramble
 - install Scramble if needed
-- disable the docs when the package is used in DTO-only mode
+- disable the docs when the package is used without the database-backed stack
 
 ## Important note
 

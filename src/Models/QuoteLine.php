@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
 /**
  * @property-read Quote|null $quote
  * @property-read Product|null $product
@@ -21,4 +23,19 @@ final class QuoteLine extends BillingModel
     protected $table = 'billing_quote_lines';
 
     protected $guarded = [];
+
+    public function quote(): BelongsTo
+    {
+        return $this->belongsTo(Quote::class, 'quote_id');
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function taxRate(): BelongsTo
+    {
+        return $this->belongsTo(TaxRate::class, 'tax_rate_id');
+    }
 }

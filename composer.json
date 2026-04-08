@@ -21,7 +21,9 @@
   },
   "autoload": {
     "psr-4": {
-      "Proovit\\Billing\\": "src/"
+      "Proovit\\Billing\\": "src/",
+      "Proovit\\Billing\\Database\\Factories\\": "database/factories/",
+      "Proovit\\Billing\\Database\\Seeders\\": "database/seeders/"
     }
   },
   "autoload-dev": {
