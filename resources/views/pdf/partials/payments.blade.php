@@ -1,51 +1,47 @@
 <table class="totals-layout">
     <tr>
-        <td style="width: 62%; padding-right: 10px; vertical-align: top;">
-            <section class="panel">
-                <h2>{{ __('billing::pdf.payments') }}</h2>
+        <td class="payment-cell left">
+            <section class="payments-box">
+                <h2 class="box-title">{{ __('billing::pdf.payments') }}</h2>
                 @if ($payments->isEmpty())
                     <div class="empty-state">{{ __('billing::pdf.no_payments') }}</div>
                 @else
-                    @foreach ($payments as $payment)
-                        <div class="totals-row">
-                            <div>
-                                <strong>{{ $payment->method?->label() ?? $payment->method?->value ?? __('billing::pdf.payment_method') }}</strong>
-                                <div class="muted">
-                                    {{ __('billing::pdf.payment_status') }}: {{ $payment->status?->label() ?? '—' }}
-                                    @if ($payment->paid_at)
-                                        · {{ __('billing::pdf.paid_at') }} {{ $formatDate($payment->paid_at) }}
-                                    @endif
-                                </div>
-                            </div>
-                            <strong>{{ $formatMoney($payment->amount) }}</strong>
-                        </div>
-                    @endforeach
+                    <table class="payment-row">
+                        @foreach ($payments as $payment)
+                            <tr>
+                                <td>
+                                    <strong>{{ $payment->method?->label() ?? $payment->method?->value ?? __('billing::pdf.payment_method') }}</strong>
+                                    <div class="muted">
+                                        {{ __('billing::pdf.payment_status') }}: {{ $payment->status?->label() ?? '—' }}
+                                        @if ($payment->paid_at)
+                                            · {{ __('billing::pdf.paid_at') }} {{ $formatDate($payment->paid_at) }}
+                                        @endif
+                                    </div>
+                                </td>
+                                <td class="currency-right"><strong>{{ $formatMoney($payment->amount) }}</strong></td>
+                            </tr>
+                        @endforeach
+                    </table>
                 @endif
             </section>
         </td>
-        <td style="width: 38%; vertical-align: top;">
+        <td class="payment-cell right">
             <section class="totals-card">
-                <h2>{{ __('billing::pdf.total') }}</h2>
-                <div class="totals-row">
-                    <span>{{ __('billing::pdf.subtotal') }}</span>
-                    <strong>{{ $formatMoney($subtotalAmount) }}</strong>
-                </div>
-                <div class="totals-row">
-                    <span>{{ __('billing::pdf.tax_total') }}</span>
-                    <strong>{{ $formatMoney($taxAmount) }}</strong>
-                </div>
-                <div class="totals-row">
-                    <span>{{ __('billing::pdf.total') }}</span>
-                    <strong>{{ $formatMoney($totalAmount) }}</strong>
-                </div>
-                <div class="totals-row">
-                    <span>{{ __('billing::pdf.paid_total') }}</span>
-                    <strong>{{ $formatMoney($paidTotal) }}</strong>
-                </div>
-                <div class="totals-row">
-                    <span>{{ __('billing::pdf.balance_due') }}</span>
-                    <strong class="balance">{{ $formatMoney($balanceDue) }}</strong>
-                </div>
+                <h2 class="box-title">{{ __('billing::pdf.total') }}</h2>
+                <table class="totals-grid">
+                    <tr>
+                        <td class="totals-label">{{ __('billing::pdf.subtotal') }}</td>
+                        <td class="totals-value">{{ $formatMoney($subtotalAmount) }}</td>
+                    </tr>
+                    <tr>
+                        <td class="totals-label">{{ __('billing::pdf.tax_total') }}</td>
+                        <td class="totals-value">{{ $formatMoney($taxAmount) }}</td>
+                    </tr>
+                    <tr class="totals-total">
+                        <td class="totals-label">{{ __('billing::pdf.total') }}</td>
+                        <td class="totals-value">{{ $formatMoney($totalAmount) }}</td>
+                    </tr>
+                </table>
             </section>
         </td>
     </tr>

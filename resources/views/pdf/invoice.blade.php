@@ -67,23 +67,21 @@
 </head>
 <body>
 <main class="page">
-    @include('billing::pdf.partials.header')
+    <div class="invoice-shell">
+        @include('billing::pdf.partials.header')
 
-    <section class="stack">
-        @include('billing::pdf.partials.parties')
+        <section class="stack">
+            @include('billing::pdf.partials.parties')
 
-        @include('billing::pdf.partials.summary')
+            @include('billing::pdf.partials.lines')
 
-        @include('billing::pdf.partials.lines')
+            @include('billing::pdf.partials.payments')
 
-        @include('billing::pdf.partials.document-details')
+            @include('billing::pdf.partials.notes-legal')
 
-        @include('billing::pdf.partials.payments')
-
-        @include('billing::pdf.partials.notes-legal')
-
-        @include('billing::pdf.partials.footer')
-    </section>
+            @include('billing::pdf.partials.footer')
+        </section>
+    </div>
 </main>
 </body>
 </html>

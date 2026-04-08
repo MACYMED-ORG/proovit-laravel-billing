@@ -1,12 +1,13 @@
 <style>
     :root {
         --paper: #ffffff;
-        --ink: #111827;
-        --muted: #6b7280;
-        --border: #d1d5db;
-        --accent: #1d4ed8;
-        --accent-soft: #eff6ff;
-        --accent-warm: #92400e;
+        --ink: #111111;
+        --muted: #666666;
+        --border: #d8d8d8;
+        --rule: #2b2b2b;
+        --accent: #111827;
+        --accent-soft: #f4f4f5;
+        --accent-warm: #8a4b16;
     }
 
     * {
@@ -15,280 +16,445 @@
 
     body {
         margin: 0;
-        background: #f3f4f6;
+        background: #ffffff;
         color: var(--ink);
-        font: 13px/1.55 "DejaVu Sans", "Segoe UI", sans-serif;
+        font: 12px/1.45 "DejaVu Sans", Arial, sans-serif;
     }
 
     .page {
         width: 100%;
-        max-width: 980px;
+        max-width: 860px;
         margin: 0 auto;
-        padding: 24px;
+        padding: 18px 24px 20px;
+    }
+
+    .invoice-shell {
+        background: var(--paper);
+        padding: 0;
+        border: 0;
     }
 
     .hero {
         width: 100%;
-        padding: 22px 24px;
-        color: #fff;
-        background: #111827;
-        border-radius: 18px;
+        padding: 0 0 12px;
     }
 
-    .eyebrow {
-        display: inline-flex;
-        padding: 6px 12px;
-        border-radius: 999px;
-        background: rgba(255, 255, 255, 0.12);
+    .header-grid {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .header-brand {
+        width: 48%;
+        vertical-align: bottom;
+        padding-right: 12px;
+    }
+
+    .brand-row {
+        display: table;
+        width: 100%;
+    }
+
+    .brand-mark {
+        display: table-cell;
+        width: 38px;
+        vertical-align: top;
+    }
+
+    .brand-mark-inner {
+        display: block;
+        width: 28px;
+        height: 28px;
+        border: 2px solid var(--ink);
+        position: relative;
+        margin-top: 2px;
+    }
+
+    .brand-mark-inner::before,
+    .brand-mark-inner::after {
+        content: '';
+        position: absolute;
+        border: 2px solid #d7a7a2;
+        width: 12px;
+        height: 12px;
+    }
+
+    .brand-mark-inner::before {
+        top: -5px;
+        right: -5px;
+    }
+
+    .brand-mark-inner::after {
+        bottom: -5px;
+        left: -5px;
+    }
+
+    .brand-copy {
+        display: table-cell;
+        vertical-align: bottom;
+        padding-left: 12px;
+    }
+
+    .brand-name {
+        font-size: 24px;
+        line-height: 1.02;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        text-transform: lowercase;
+    }
+
+    .brand-subtitle {
+        margin-top: 3px;
+        color: var(--muted);
         text-transform: uppercase;
-        letter-spacing: 0.16em;
+        letter-spacing: 0.18em;
         font-size: 11px;
         font-weight: 700;
     }
 
-    .hero h1 {
-        margin: 16px 0 6px;
-        font-size: 28px;
-        line-height: 1.05;
-        letter-spacing: -0.03em;
+    .header-title {
+        width: 52%;
+        text-align: right;
+        vertical-align: bottom;
+        line-height: 0.95;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
     }
 
-    .hero h1 span {
-        color: #dbeafe;
+    .document-title {
+        font-size: 34px;
+        font-weight: 900;
     }
 
-    .hero .subtitle {
-        margin: 0;
-        color: rgba(255, 255, 255, 0.78);
-        max-width: 56ch;
+    .document-number {
+        margin-top: 2px;
+        font-size: 20px;
+        font-weight: 800;
     }
 
-    .meta-grid {
+    .invoice-meta {
         width: 100%;
+        margin-top: 12px;
+        border-top: 2px solid var(--rule);
+        border-bottom: 1px solid var(--border);
+        padding: 8px 0;
+        border-collapse: collapse;
+    }
+
+    .invoice-meta td {
+        width: 25%;
+        padding: 0 10px 0 0;
+        vertical-align: top;
+    }
+
+    .meta-label {
+        color: var(--muted);
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        font-weight: 800;
+    }
+
+    .meta-value {
+        margin-top: 4px;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .stack {
+        width: 100%;
+    }
+
+    .invoice-section {
+        margin-top: 12px;
+    }
+
+    .section-title {
+        margin: 0 0 10px;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 800;
+        color: var(--ink);
+    }
+
+    .party-grid,
+    .totals-layout,
+    .notes-grid {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .party-grid,
+    .line-section,
+    .totals-layout,
+    .notes-grid,
+    .payments-box,
+    .notes-box,
+    .totals-card,
+    .card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    .party-cell {
+        width: 50%;
+        vertical-align: top;
+        padding-right: 8px;
+    }
+
+    .party-cell:last-child {
+        padding-right: 0;
+        padding-left: 8px;
     }
 
     .card,
     .totals-card,
-    .panel {
+    .panel,
+    .details-box,
+    .notes-box,
+    .payments-box {
         background: #fff;
         border: 1px solid var(--border);
-        border-radius: 14px;
-    }
-
-    .meta-card {
-        padding: 18px;
-        color: #fff;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.14);
-    }
-
-    .meta-label {
-        color: rgba(255, 255, 255, 0.7);
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0.14em;
-        margin-bottom: 6px;
-    }
-
-    .meta-value {
-        color: #fff;
-        font-size: 18px;
-        font-weight: 700;
-        word-break: break-word;
-    }
-
-    .stack {
-        margin-top: 16px;
-    }
-
-    .cards-2,
-    .summary,
-    .totals-layout {
-        width: 100%;
-        border-collapse: collapse;
+        border-radius: 0;
     }
 
     .card {
-        padding: 22px;
-        background: var(--paper);
+        padding: 14px 16px;
     }
 
-    .card h2,
-    .panel h2,
-    .totals-card h2 {
-        margin: 0 0 14px;
-        font-size: 18px;
-        letter-spacing: -0.02em;
-    }
-
-    .section-label {
-        margin-bottom: 10px;
-        color: var(--muted);
+    .party-label {
         font-size: 11px;
         text-transform: uppercase;
-        letter-spacing: 0.14em;
-        font-weight: 700;
-    }
-
-    .identity-grid {
-        width: 100%;
-        border-collapse: collapse;
-    }
-
-    .field {
-        padding: 0 0 10px 0;
-    }
-
-    .field .label {
-        color: var(--muted);
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-    }
-
-    .field .value {
-        white-space: pre-line;
-        font-weight: 600;
-    }
-
-    .summary {
-        margin-bottom: 18px;
-    }
-
-    .summary .card {
-        background: #fff;
-    }
-
-    .summary .metric {
-        font-size: 26px;
+        letter-spacing: 0.16em;
         font-weight: 800;
-        letter-spacing: -0.03em;
-        margin-top: 8px;
-    }
-
-    .summary .hint {
         color: var(--muted);
-        font-size: 12px;
+        margin-bottom: 8px;
     }
 
-    .table-wrap {
-        overflow: hidden;
+    .party-name {
+        font-size: 18px;
+        font-weight: 800;
+        margin-bottom: 8px;
     }
 
-    table {
+    .detail-list {
         width: 100%;
         border-collapse: collapse;
     }
 
-    thead th {
-        background: #f8fafc;
-        color: var(--muted);
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        text-align: left;
-        padding: 14px 12px;
-        border-bottom: 1px solid var(--border);
-    }
-
-    tbody td {
-        padding: 16px 12px;
-        border-bottom: 1px solid #ebe7df;
+    .detail-list td {
+        padding: 0 0 4px;
         vertical-align: top;
     }
 
-    tbody tr:last-child td {
-        border-bottom: 0;
+    .detail-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+        font-weight: 700;
+        width: 36%;
+        padding-right: 10px;
     }
 
-    .line-desc {
+    .detail-value {
+        font-weight: 600;
+        white-space: pre-line;
+    }
+
+    .line-items {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 12px;
+        table-layout: fixed;
+    }
+
+    .line-items thead th {
+        padding: 8px 6px;
+        border-top: 2px solid var(--rule);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+    }
+
+    .line-items tbody td {
+        padding: 8px 6px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+    }
+
+    .line-items tbody tr:last-child td {
+        border-bottom: 2px solid var(--rule);
+    }
+
+    .line-description {
         font-weight: 700;
     }
 
-    .line-meta {
-        margin-top: 4px;
+    .line-sku {
+        margin-top: 2px;
         color: var(--muted);
-        font-size: 12px;
+        font-size: 11px;
+    }
+
+    .currency-right {
+        text-align: right;
+    }
+
+    .summary {
+        margin-top: 12px;
     }
 
     .totals-layout {
-        margin-top: 18px;
+        margin-top: 12px;
+    }
+
+    .payment-cell {
+        vertical-align: top;
+    }
+
+    .payment-cell.left {
+        width: 58%;
+        padding-right: 8px;
+    }
+
+    .payment-cell.right {
+        width: 42%;
     }
 
     .totals-card {
-        padding: 22px;
+        padding: 12px 14px;
     }
 
-    .totals-row {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 10px 0;
-        border-bottom: 1px solid #ebe7df;
-    }
-
-    .totals-row:last-child {
-        border-bottom: 0;
-    }
-
-    .totals-row strong {
-        font-size: 18px;
-    }
-
-    .balance {
-        color: var(--accent-warm);
-    }
-
-    .panel {
-        padding: 22px;
-    }
-
-    .badge-grid {
-        margin-top: 14px;
-    }
-
-    .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        border-radius: 999px;
-        background: var(--accent-soft);
-        color: #1d4ed8;
-        font-weight: 700;
-        font-size: 12px;
-    }
-
-    .legal-list {
-        margin: 0;
-        padding-left: 18px;
-        color: var(--muted);
-    }
-
-    .footnote {
-        margin-top: 18px;
-        color: var(--muted);
-        font-size: 12px;
-    }
-
-    .footnote table {
+    .totals-grid {
         width: 100%;
+        border-collapse: collapse;
     }
 
-    .footnote td:last-child {
+    .totals-label {
+        width: 72%;
         text-align: right;
+        padding: 5px 10px 5px 0;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .totals-value {
+        width: 28%;
+        text-align: right;
+        padding: 5px 0;
+        font-weight: 800;
+    }
+
+    .totals-total {
+        border-top: 2px solid var(--rule);
+        border-bottom: 2px solid var(--rule);
+    }
+
+    .totals-total .totals-label,
+    .totals-total .totals-value {
+        font-size: 15px;
+    }
+
+    .payments-grid {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 18px;
+    }
+
+    .notes-cell {
+        width: 50%;
+        vertical-align: top;
+        padding-right: 8px;
+    }
+
+    .notes-cell:last-child {
+        padding-right: 0;
+        padding-left: 8px;
+    }
+
+    .payments-box,
+    .notes-box,
+    .details-box {
+        padding: 12px 14px;
+    }
+
+    .box-title {
+        margin: 0 0 10px;
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: var(--muted);
+        font-weight: 800;
+    }
+
+    .empty-state {
+        color: var(--muted);
+        border: 1px dashed var(--border);
+        padding: 10px;
+    }
+
+    .payment-row {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .payment-row td {
+        padding: 6px 0;
+        border-bottom: 1px solid #ececec;
+    }
+
+    .payment-row tr:last-child td {
+        border-bottom: 0;
     }
 
     .muted {
         color: var(--muted);
     }
 
-    .empty-state {
-        padding: 18px;
-        border: 1px dashed var(--border);
-        border-radius: 16px;
+    .legal-list {
+        margin: 0;
+        padding-left: 18px;
+    }
+
+    .chips {
+        margin-top: 10px;
+    }
+
+    .chip {
+        display: inline-block;
+        padding: 5px 9px;
+        margin: 0 6px 6px 0;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: var(--accent-soft);
+        color: var(--accent);
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+    }
+
+    .footnote {
+        margin-top: 16px;
+        border-top: 1px solid var(--border);
+        padding-top: 10px;
         color: var(--muted);
-        background: #fcfbf8;
+        font-size: 11px;
+    }
+
+    .footnote table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .footnote td:last-child {
+        text-align: right;
     }
 
     @media print {
@@ -300,5 +466,80 @@
             padding: 0;
             max-width: none;
         }
+
+        .invoice-shell {
+            border: 0;
+            padding: 0;
+        }
+    }
+
+    .line-section h2 {
+        margin: 0 0 8px;
+        font-size: 13px;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 800;
+    }
+
+    .line-desc {
+        font-weight: 700;
+    }
+
+    .line-meta {
+        margin-top: 2px;
+        color: var(--muted);
+        font-size: 11px;
+    }
+
+    .line-separator {
+        display: inline-block;
+        margin: 0 6px;
+    }
+
+    .line-table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .line-table thead th {
+        padding: 8px 6px;
+        border-top: 2px solid var(--rule);
+        border-bottom: 1px solid var(--border);
+        text-align: left;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: var(--muted);
+    }
+
+    .line-table tbody td {
+        padding: 8px 6px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+    }
+
+    .line-table tbody tr:last-child td {
+        border-bottom: 2px solid var(--rule);
+    }
+
+    .line-col-index {
+        width: 4%;
+    }
+
+    .line-col-description {
+        width: 50%;
+    }
+
+    .line-col-quantity {
+        width: 10%;
+    }
+
+    .line-col-unit {
+        width: 18%;
+    }
+
+    .line-col-total {
+        width: 18%;
     }
 </style>
