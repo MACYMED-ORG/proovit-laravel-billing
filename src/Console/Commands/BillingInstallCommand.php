@@ -9,8 +9,8 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Process;
 use Laravel\Sanctum\Sanctum;
-use Symfony\Component\Process\Process;
 
 final class BillingInstallCommand extends Command
 {
@@ -47,23 +47,33 @@ final class BillingInstallCommand extends Command
                     class_exists(Sanctum::class) ? 'sanctum' : 'none'
                 );
 
+                $sanctumAvailable = class_exists(Sanctum::class);
+
                 if ($authMode === 'existing middleware') {
                     $value = (string) $this->ask(
                         'Enter the middleware stack separated by commas',
-                        class_exists(Sanctum::class) ? 'auth:sanctum' : ''
+                        $sanctumAvailable ? 'auth:sanctum' : ''
                     );
 
                     $apiAuthMiddleware = array_values(array_filter(array_map('trim', explode(',', $value))));
                 } elseif ($authMode === 'sanctum') {
-                    if (! class_exists(Sanctum::class)) {
+                    if (! $sanctumAvailable) {
                         if ($this->confirm('Laravel Sanctum is not installed. Install it now?', true)) {
-                            $this->installSanctum();
+                            if ($this->installSanctum()) {
+                                $sanctumAvailable = true;
+                            } else {
+                                $this->warn('Sanctum was not installed automatically. Falling back to no API auth middleware.');
+                                $authMode = 'none';
+                            }
                         } else {
                             $this->warn('Sanctum was not installed. Leaving the API middleware empty.');
+                            $authMode = 'none';
                         }
                     }
 
-                    $apiAuthMiddleware = ['auth:sanctum'];
+                    if ($authMode === 'sanctum' && $sanctumAvailable) {
+                        $apiAuthMiddleware = ['auth:sanctum'];
+                    }
                 }
             }
 
@@ -72,7 +82,10 @@ final class BillingInstallCommand extends Command
 
             if ($enableDocs && ! class_exists(Scramble::class)) {
                 if ($this->confirm('Scramble is not installed. Install it now?', true)) {
-                    $this->installScramble();
+                    if (! $this->installScramble()) {
+                        $this->warn('Scramble was not installed automatically. Billing API docs will remain disabled.');
+                        $enableDocs = false;
+                    }
                 } else {
                     $this->warn('Scramble was not installed. Billing API docs will remain disabled.');
                     $enableDocs = false;
@@ -150,40 +163,42 @@ final class BillingInstallCommand extends Command
         File::put(config_path('billing.php'), $contents);
     }
 
-    private function installSanctum(): void
+    private function installSanctum(): bool
     {
-        $process = Process::fromShellCommandline(
+        $result = Process::path(base_path())->forever()->run(
             'composer require laravel/sanctum --no-interaction --with-all-dependencies',
-            base_path()
+            function (string $type, string $buffer): void {
+                $this->output->write($buffer);
+            }
         );
 
-        $process->setTimeout(null);
-        $process->run(function (string $type, string $buffer): void {
-            $this->output->write($buffer);
-        });
-
-        if (! $process->isSuccessful()) {
-            $this->error('Unable to install Laravel Sanctum automatically.');
-            $this->line('Run `composer require laravel/sanctum` manually, then rerun `php artisan billing:install`.');
+        if ($result->successful()) {
+            return true;
         }
+
+        $this->error('Unable to install Laravel Sanctum automatically.');
+        $this->line('Run `composer require laravel/sanctum` manually, then rerun `php artisan billing:install`.');
+
+        return false;
     }
 
-    private function installScramble(): void
+    private function installScramble(): bool
     {
-        $process = Process::fromShellCommandline(
+        $result = Process::path(base_path())->forever()->run(
             'composer require --dev dedoc/scramble --no-interaction --with-all-dependencies',
-            base_path()
+            function (string $type, string $buffer): void {
+                $this->output->write($buffer);
+            }
         );
 
-        $process->setTimeout(null);
-        $process->run(function (string $type, string $buffer): void {
-            $this->output->write($buffer);
-        });
-
-        if (! $process->isSuccessful()) {
-            $this->error('Unable to install Scramble automatically.');
-            $this->line('Run `composer require --dev dedoc/scramble` manually, then rerun `php artisan billing:install`.');
+        if ($result->successful()) {
+            return true;
         }
+
+        $this->error('Unable to install Scramble automatically.');
+        $this->line('Run `composer require --dev dedoc/scramble` manually, then rerun `php artisan billing:install`.');
+
+        return false;
     }
 
     private function resolveDatabaseMode(): bool

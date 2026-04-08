@@ -24,6 +24,10 @@ use Proovit\Billing\ValueObjects\UnitPrice;
 
 uses(RefreshDatabase::class);
 
+beforeEach(function (): void {
+    config()->set('billing.public_shares.enabled', true);
+});
+
 function billingApiFixture(): array
 {
     $company = Company::create([

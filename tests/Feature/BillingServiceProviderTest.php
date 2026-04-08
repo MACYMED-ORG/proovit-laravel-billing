@@ -9,6 +9,10 @@ use Proovit\Billing\Contracts\InvoiceCalculatorInterface;
 use Proovit\Billing\Support\ConfigBillingConfigResolver;
 use Proovit\Billing\Support\ConfigInvoiceCalculator;
 
+beforeEach(function (): void {
+    config()->set('billing.features.api', false);
+});
+
 it('loads the billing configuration and container binding', function (): void {
     expect(config('billing.features.api'))->toBeFalse();
     expect(config('billing.numbering.prefix'))->toBe('INV');

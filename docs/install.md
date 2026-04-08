@@ -101,3 +101,8 @@ The installer can install dependencies for you:
 - `dedoc/scramble`
 
 If installation fails, the command prints the exact Composer command to run manually.
+
+When automatic dependency installation fails, the installer falls back safely:
+
+- the requested feature is disabled instead of leaving a broken config behind
+- the command still completes so you can inspect the suggested manual Composer command

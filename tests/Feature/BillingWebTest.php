@@ -16,6 +16,10 @@ use Tests\TestCase;
 
 uses(RefreshDatabase::class);
 
+beforeEach(function (): void {
+    config()->set('billing.public_shares.enabled', true);
+});
+
 function billingWebFixture(): Invoice
 {
     $company = Company::factory()->create([

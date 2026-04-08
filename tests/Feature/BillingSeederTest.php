@@ -12,6 +12,10 @@ use Proovit\Billing\Models\Quote;
 
 uses(RefreshDatabase::class);
 
+beforeEach(function (): void {
+    config()->set('billing.public_shares.enabled', true);
+});
+
 it('seeds a realistic billing demo dataset', function (): void {
     app(BillingDemoSeeder::class)->run();
 
