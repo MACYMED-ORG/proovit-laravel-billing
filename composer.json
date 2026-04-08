@@ -1,0 +1,65 @@
+{
+  "name": "proovit/laravel-billing",
+  "version": "1.0.0",
+  "description": "Coeur métier de facturation déterministe pour la suite ProovIT.",
+  "type": "library",
+  "license": "MIT",
+  "require": {
+    "php": "^8.3",
+    "brick/math": "^0.14.2",
+    "illuminate/contracts": "^13.0",
+    "illuminate/database": "^13.0",
+    "illuminate/support": "^13.0"
+  },
+  "require-dev": {
+    "dedoc/scramble": "^0.13.17",
+    "larastan/larastan": "^3.9.3",
+    "laravel/pint": "^1.29.0",
+    "phpstan/phpstan": "^2.1.22",
+    "orchestra/testbench": "^11.0",
+    "pestphp/pest": "^3.8"
+  },
+  "autoload": {
+    "psr-4": {
+      "Proovit\\Billing\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Proovit\\Billing\\BillingServiceProvider"
+      ]
+    }
+  },
+    "scripts": {
+    "format": [
+      "@php vendor/bin/pint src tests"
+    ],
+    "format:test": [
+      "@php vendor/bin/pint --test src tests"
+    ],
+    "analyse": [
+      "@php vendor/bin/phpstan analyse --ansi --memory-limit=1G"
+    ],
+    "qa": [
+      "@format:test",
+      "@analyse",
+      "@test"
+    ],
+    "test": [
+      "@php vendor/bin/pest"
+    ]
+  },
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
+}
