@@ -1,7 +1,7 @@
 {
   "name": "proovit/laravel-billing",
   "version": "1.0.0",
-  "description": "Coeur métier de facturation déterministe pour la suite ProovIT.",
+  "description": "Laravel 13 billing package for invoices, quotes, payments, credit notes, public invoice sharing, PDF rendering, and API-driven billing workflows.",
   "type": "library",
   "license": "MIT",
   "require": {
