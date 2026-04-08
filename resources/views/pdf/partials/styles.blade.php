@@ -1,14 +1,12 @@
 <style>
     :root {
-        --bg: #f4efe7;
         --paper: #ffffff;
-        --ink: #0f172a;
-        --muted: #64748b;
-        --border: #d7d2c7;
+        --ink: #111827;
+        --muted: #6b7280;
+        --border: #d1d5db;
         --accent: #1d4ed8;
-        --accent-soft: #dbeafe;
-        --accent-warm: #b45309;
-        --success: #166534;
+        --accent-soft: #eff6ff;
+        --accent-warm: #92400e;
     }
 
     * {
@@ -17,37 +15,28 @@
 
     body {
         margin: 0;
-        background:
-            radial-gradient(circle at top right, rgba(29, 78, 216, 0.12), transparent 28%),
-            linear-gradient(180deg, #faf7f2 0%, var(--bg) 100%);
+        background: #f3f4f6;
         color: var(--ink);
-        font: 14px/1.55 "Inter", "Segoe UI", sans-serif;
+        font: 13px/1.55 "DejaVu Sans", "Segoe UI", sans-serif;
     }
 
     .page {
         width: 100%;
-        max-width: 1180px;
+        max-width: 980px;
         margin: 0 auto;
-        padding: 32px;
+        padding: 24px;
     }
 
     .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.7fr) minmax(280px, 0.9fr);
-        gap: 24px;
-        padding: 28px;
+        width: 100%;
+        padding: 22px 24px;
         color: #fff;
-        background:
-            linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.92)),
-            radial-gradient(circle at top left, rgba(29, 78, 216, 0.7), transparent 32%);
-        border-radius: 28px;
-        box-shadow: 0 32px 80px rgba(15, 23, 42, 0.22);
+        background: #111827;
+        border-radius: 18px;
     }
 
     .eyebrow {
         display: inline-flex;
-        align-items: center;
-        gap: 8px;
         padding: 6px 12px;
         border-radius: 999px;
         background: rgba(255, 255, 255, 0.12);
@@ -59,7 +48,7 @@
 
     .hero h1 {
         margin: 16px 0 6px;
-        font-size: 36px;
+        font-size: 28px;
         line-height: 1.05;
         letter-spacing: -0.03em;
     }
@@ -75,27 +64,26 @@
     }
 
     .meta-grid {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 12px;
+        width: 100%;
     }
 
-    .meta-card,
     .card,
     .totals-card,
     .panel {
-        background: rgba(255, 255, 255, 0.92);
-        border: 1px solid rgba(215, 210, 199, 0.95);
-        border-radius: 20px;
-        box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 14px;
     }
 
     .meta-card {
         padding: 18px;
+        color: #fff;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.14);
     }
 
     .meta-label {
-        color: rgba(255, 255, 255, 0.72);
+        color: rgba(255, 255, 255, 0.7);
         font-size: 11px;
         text-transform: uppercase;
         letter-spacing: 0.14em;
@@ -103,21 +91,21 @@
     }
 
     .meta-value {
+        color: #fff;
         font-size: 18px;
         font-weight: 700;
         word-break: break-word;
     }
 
     .stack {
-        display: grid;
-        gap: 18px;
-        margin-top: 18px;
+        margin-top: 16px;
     }
 
-    .cards-2 {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
+    .cards-2,
+    .summary,
+    .totals-layout {
+        width: 100%;
+        border-collapse: collapse;
     }
 
     .card {
@@ -143,13 +131,12 @@
     }
 
     .identity-grid {
-        display: grid;
-        gap: 12px;
+        width: 100%;
+        border-collapse: collapse;
     }
 
     .field {
-        display: grid;
-        gap: 2px;
+        padding: 0 0 10px 0;
     }
 
     .field .label {
@@ -165,13 +152,11 @@
     }
 
     .summary {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 14px;
+        margin-bottom: 18px;
     }
 
     .summary .card {
-        background: linear-gradient(180deg, #fff, #fbfaf8);
+        background: #fff;
     }
 
     .summary .metric {
@@ -227,10 +212,7 @@
     }
 
     .totals-layout {
-        display: grid;
-        grid-template-columns: minmax(0, 1.3fr) minmax(320px, 0.7fr);
-        gap: 18px;
-        align-items: start;
+        margin-top: 18px;
     }
 
     .totals-card {
@@ -262,9 +244,7 @@
     }
 
     .badge-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
+        margin-top: 14px;
     }
 
     .badge {
@@ -286,12 +266,17 @@
     }
 
     .footnote {
-        display: flex;
-        justify-content: space-between;
-        gap: 14px;
         margin-top: 18px;
         color: var(--muted);
         font-size: 12px;
+    }
+
+    .footnote table {
+        width: 100%;
+    }
+
+    .footnote td:last-child {
+        text-align: right;
     }
 
     .muted {
@@ -314,14 +299,6 @@
         .page {
             padding: 0;
             max-width: none;
-        }
-
-        .hero,
-        .card,
-        .totals-card,
-        .panel,
-        .meta-card {
-            box-shadow: none;
         }
     }
 </style>
