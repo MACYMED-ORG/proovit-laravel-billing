@@ -957,7 +957,7 @@ parameters:
 		-
 			message: '#^Call to an undefined method PHPUnit\\Framework\\TestCase\:\:postJson\(\)\.$#'
 			identifier: method.notFound
-			count: 8
+			count: 10
 			path: tests/Feature/BillingApiTest.php
 
 		-

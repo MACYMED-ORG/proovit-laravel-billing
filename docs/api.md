@@ -57,6 +57,7 @@ Route::post('customers', StoreCustomerController::class);
 - `POST /invoices/{invoice}/payments`
 - `POST /invoices/{invoice}/credit-notes`
 - `POST /invoices/{invoice}/share-link`
+- `POST /invoices/{invoice}/share-link/revoke`
 
 Example payload for a draft invoice:
 
@@ -80,6 +81,15 @@ Example payload for a draft invoice:
       "tax_rate": "20"
     }
   ]
+}
+```
+
+Example payload for a share link:
+
+```json
+{
+  "regenerate": true,
+  "expires_days": 15
 }
 ```
 

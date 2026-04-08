@@ -8,14 +8,26 @@ use Dedoc\Scramble\Attributes\Group;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Proovit\Billing\Actions\Invoices\GenerateInvoiceShareLinkAction;
+use Proovit\Billing\Http\Requests\Api\Invoices\GenerateInvoiceShareLinkRequest;
 use Proovit\Billing\Models\Invoice;
 
 #[Group('Invoices')]
 final class GenerateInvoiceShareLinkController extends Controller
 {
-    public function __invoke(Invoice $invoice, GenerateInvoiceShareLinkAction $generateInvoiceShareLinkAction): JsonResponse
-    {
-        $url = $generateInvoiceShareLinkAction->handle($invoice);
+    public function __invoke(
+        GenerateInvoiceShareLinkRequest $request,
+        Invoice $invoice,
+        GenerateInvoiceShareLinkAction $generateInvoiceShareLinkAction
+    ): JsonResponse {
+        $expiresAt = $request->filled('expires_days')
+            ? now()->addDays((int) $request->integer('expires_days'))
+            : null;
+
+        $url = $generateInvoiceShareLinkAction->handle(
+            $invoice,
+            $expiresAt,
+            $request->boolean('regenerate')
+        );
 
         return response()->json([
             'data' => [

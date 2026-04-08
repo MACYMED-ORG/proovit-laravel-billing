@@ -16,10 +16,16 @@ use Proovit\Billing\Actions\Invoices\GenerateInvoiceShareLinkAction;
 $url = app(GenerateInvoiceShareLinkAction::class)->handle($invoice);
 ```
 
+To rotate the link, call the API with `regenerate=true`.
+
+To revoke it completely, call the revoke endpoint.
+
 ## Security model
 
 - the link is signed
 - the link can expire
+- the link can be rotated
+- the link can be revoked
 - the link is separate from the authenticated API
 - the link should not replace your auth strategy
 

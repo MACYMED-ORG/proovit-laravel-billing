@@ -302,4 +302,15 @@ it('supports customer quote draft and public share flows through uuid routes', f
     $this->postJson(route('billing.api.invoices.share-link', $invoice->fresh()->uuid_identifier))
         ->assertOk()
         ->assertJsonPath('data.public_share_url', $shareUrl);
+
+    $rotated = $this->postJson(route('billing.api.invoices.share-link', $invoice->fresh()->uuid_identifier), [
+        'regenerate' => true,
+        'expires_days' => 15,
+    ])->assertOk();
+
+    expect($rotated->json('data.public_share_url'))->not->toBe($shareUrl);
+
+    $this->postJson(route('billing.api.invoices.share-link.revoke', $invoice->fresh()->uuid_identifier))
+        ->assertOk()
+        ->assertJsonPath('data.public_share_url', null);
 });

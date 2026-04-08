@@ -7,13 +7,21 @@ namespace Proovit\Billing\Actions\Invoices;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
+use LogicException;
 use Proovit\Billing\Models\Invoice;
 
 final class GenerateInvoiceShareLinkAction
 {
-    public function handle(Invoice $invoice, ?Carbon $expiresAt = null): string
+    public function handle(Invoice $invoice, ?Carbon $expiresAt = null, bool $regenerate = false): string
     {
-        $token = $invoice->public_share_token ?: Str::random(64);
+        if (! (bool) config('billing.public_shares.enabled', true)) {
+            throw new LogicException('Public sharing is disabled.');
+        }
+
+        $token = $regenerate || ! $invoice->public_share_token
+            ? Str::random(64)
+            : $invoice->public_share_token;
+
         $expiresAt ??= now()->addDays((int) config('billing.public_shares.expires_days', 30));
 
         $invoice->forceFill([

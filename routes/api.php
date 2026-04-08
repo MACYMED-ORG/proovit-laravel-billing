@@ -7,6 +7,7 @@ use Proovit\Billing\Http\Controllers\Api\Customers\DeleteCustomerController;
 use Proovit\Billing\Http\Controllers\Api\Quotes\DeleteQuoteController;
 use Proovit\Billing\Http\Controllers\Api\Invoices\FinalizeInvoiceController;
 use Proovit\Billing\Http\Controllers\Api\Invoices\GenerateInvoiceShareLinkController;
+use Proovit\Billing\Http\Controllers\Api\Invoices\RevokeInvoiceShareLinkController;
 use Proovit\Billing\Http\Controllers\Api\Quotes\ConvertQuoteToInvoiceController;
 use Proovit\Billing\Http\Controllers\Api\Customers\ListCustomersController;
 use Proovit\Billing\Http\Controllers\Api\Quotes\ListQuotesController;
@@ -55,6 +56,7 @@ Route::prefix($prefix)
         Route::post('invoices/{invoice}/payments', StorePaymentController::class)->name('invoices.payments.store');
         Route::post('invoices/{invoice}/credit-notes', StoreCreditNoteController::class)->name('invoices.credit-notes.store');
         Route::post('invoices/{invoice}/share-link', GenerateInvoiceShareLinkController::class)->name('invoices.share-link');
+        Route::post('invoices/{invoice}/share-link/revoke', RevokeInvoiceShareLinkController::class)->name('invoices.share-link.revoke');
         Route::get('quotes', ListQuotesController::class)->name('quotes.index');
         Route::post('quotes', StoreQuoteController::class)->name('quotes.store');
         Route::get('quotes/{quote}', ShowQuoteController::class)->name('quotes.show');
