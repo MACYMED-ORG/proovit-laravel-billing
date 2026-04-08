@@ -70,11 +70,13 @@
     @include('billing::pdf.partials.header')
 
     <section class="stack">
-        @include('billing::pdf.partials.summary')
-
         @include('billing::pdf.partials.parties')
 
+        @include('billing::pdf.partials.summary')
+
         @include('billing::pdf.partials.lines')
+
+        @include('billing::pdf.partials.document-details')
 
         @include('billing::pdf.partials.payments')
 
