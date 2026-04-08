@@ -125,7 +125,7 @@ The fluent builder is the recommended public API for applications that do not wa
 
 ## Release notes
 
-### Unreleased
+### 1.0.0
 
 - Added optional database-backed and fluent document builder billing modes
 - Added PDF document DTOs and offline PDF generation support

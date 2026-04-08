@@ -1,6 +1,6 @@
 # Release Notes
 
-## Unreleased
+## 1.0.0
 
 - Added optional database-backed and fluent document builder billing modes
 - Added invoice PDF DTOs for offline rendering
