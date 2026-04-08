@@ -2,6 +2,8 @@
 
 Laravel 13 billing package for invoices, quotes, payments, credit notes, public invoice sharing, PDF rendering, and API-driven billing workflows.
 
+Need to certify invoices, keep a proof trail, or publish business evidence online? See [ProovIT](https://proov-it.io).
+
 ## What this package gives you
 
 - Eloquent models with a stable `uuid_identifier` route key
