@@ -25,7 +25,7 @@
         width: 100%;
         max-width: 860px;
         margin: 0 auto;
-        padding: 18px 24px 20px;
+        padding: 18px 18px 20px;
     }
 
     .invoice-shell {
@@ -200,12 +200,12 @@
     .party-cell {
         width: 50%;
         vertical-align: top;
-        padding-right: 8px;
+        padding-right: 10px;
     }
 
     .party-cell:last-child {
         padding-right: 0;
-        padding-left: 8px;
+        padding-left: 10px;
     }
 
     .card,
@@ -370,12 +370,12 @@
     .notes-cell {
         width: 50%;
         vertical-align: top;
-        padding-right: 8px;
+        padding-right: 10px;
     }
 
     .notes-cell:last-child {
         padding-right: 0;
-        padding-left: 8px;
+        padding-left: 10px;
     }
 
     .payments-box,
