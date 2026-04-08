@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.0.1
+
+- Added a downloadable sample invoice PDF generated from the default Blade views
+- Refined the classic invoice layout and balanced the page spacing
+
 ## 1.0.0
 
 - Added optional database-backed and fluent document builder billing modes

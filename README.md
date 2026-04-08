@@ -102,6 +102,7 @@ The fluent builder is the recommended public API for applications that do not wa
 - [Invoices](docs/use-cases/invoices.md)
 - [Quotes](docs/use-cases/quotes.md)
 - [PDF rendering](docs/use-cases/pdf.md)
+- [Sample PDF output](docs/assets/invoice-sample.pdf)
 - [Web preview and print](docs/use-cases/web-preview.md)
 - [Document builder mode](docs/use-cases/document-builder.md)
 - [Storage](docs/use-cases/storage.md)
@@ -126,6 +127,11 @@ The fluent builder is the recommended public API for applications that do not wa
 - `Makefile` for common local and Sail-based tasks
 
 ## Release notes
+
+### 1.0.1
+
+- Added a downloadable sample PDF generated from the default invoice Blade views
+- Refined the classic invoice layout and page spacing
 
 ### 1.0.0
 

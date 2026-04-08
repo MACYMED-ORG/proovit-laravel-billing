@@ -17,6 +17,7 @@ This documentation covers the `proovit/laravel-billing` package from a user and 
 - [Invoices](use-cases/invoices.md)
 - [Quotes](use-cases/quotes.md)
 - [PDF rendering](use-cases/pdf.md)
+- [Sample PDF output](assets/invoice-sample.pdf)
 - [Web preview and print](use-cases/web-preview.md)
 - [Document builder mode](use-cases/document-builder.md)
 - [Storage](use-cases/storage.md)

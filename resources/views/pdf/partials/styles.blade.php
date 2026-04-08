@@ -45,9 +45,9 @@
     }
 
     .header-brand {
-        width: 48%;
+        width: 50%;
         vertical-align: bottom;
-        padding-right: 12px;
+        padding-right: 10px;
     }
 
     .brand-row {
@@ -57,14 +57,14 @@
 
     .brand-mark {
         display: table-cell;
-        width: 38px;
+        width: 32px;
         vertical-align: top;
     }
 
     .brand-mark-inner {
         display: block;
-        width: 28px;
-        height: 28px;
+        width: 24px;
+        height: 24px;
         border: 2px solid var(--ink);
         position: relative;
         margin-top: 2px;
@@ -92,11 +92,11 @@
     .brand-copy {
         display: table-cell;
         vertical-align: bottom;
-        padding-left: 12px;
+        padding-left: 8px;
     }
 
     .brand-name {
-        font-size: 24px;
+        font-size: 23px;
         line-height: 1.02;
         font-weight: 800;
         letter-spacing: -0.02em;
@@ -113,7 +113,7 @@
     }
 
     .header-title {
-        width: 52%;
+        width: 50%;
         text-align: right;
         vertical-align: bottom;
         line-height: 0.95;
@@ -122,13 +122,13 @@
     }
 
     .document-title {
-        font-size: 34px;
+        font-size: 32px;
         font-weight: 900;
     }
 
     .document-number {
         margin-top: 2px;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 800;
     }
 
