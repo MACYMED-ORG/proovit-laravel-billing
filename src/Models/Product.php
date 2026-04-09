@@ -34,6 +34,38 @@ final class Product extends BillingModel
         return $this->hasMany(ProductPrice::class, 'product_id');
     }
 
+    public function invoiceLines(): HasMany
+    {
+        return $this->hasMany(InvoiceLine::class, 'product_id');
+    }
+
+    public function quoteLines(): HasMany
+    {
+        return $this->hasMany(QuoteLine::class, 'product_id');
+    }
+
+    public function creditNoteLines(): HasMany
+    {
+        return $this->hasMany(CreditNoteLine::class, 'product_id');
+    }
+
+    public function isReferencedInDocuments(): bool
+    {
+        return $this->invoiceLines()->exists()
+            || $this->quoteLines()->exists()
+            || $this->creditNoteLines()->exists();
+    }
+
+    public function canManagePrices(): bool
+    {
+        return ! $this->isReferencedInDocuments();
+    }
+
+    public function canEditCatalog(): bool
+    {
+        return ! $this->isReferencedInDocuments();
+    }
+
     public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);
