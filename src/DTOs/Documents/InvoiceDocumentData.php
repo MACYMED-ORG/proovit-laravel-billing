@@ -4,16 +4,12 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\DTOs\Documents;
 
-use Carbon\Carbon;
 use DateTimeInterface;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Fluent;
+use Illuminate\Database\Eloquent\Collection;
 use Proovit\Billing\DTOs\InvoiceDraftData;
 use Proovit\Billing\DTOs\InvoiceTotalsData;
 use Proovit\Billing\Enums\InvoiceStatus;
 use Proovit\Billing\Enums\InvoiceType;
-use Proovit\Billing\Enums\PaymentMethodType;
-use Proovit\Billing\Enums\PaymentStatus;
 use Proovit\Billing\Models\Company;
 use Proovit\Billing\Models\CompanyBankAccount;
 use Proovit\Billing\Models\CompanyEstablishment;
@@ -24,6 +20,7 @@ use Proovit\Billing\Models\InvoiceNumberReservation;
 use Proovit\Billing\Models\InvoiceSeries;
 use Proovit\Billing\Models\Payment;
 use Proovit\Billing\Models\Quote;
+use Proovit\Billing\Support\InvoiceDocumentViewModelFactory;
 use Proovit\Billing\ValueObjects\CompanyIdentitySnapshot;
 use Proovit\Billing\ValueObjects\CustomerIdentitySnapshot;
 use Proovit\Billing\ValueObjects\Money;
@@ -93,10 +90,10 @@ final readonly class InvoiceDocumentData
         /** @var Customer|null $customer */
         $customer = $invoice->getRelationValue('customer');
 
-        /** @var \Illuminate\Database\Eloquent\Collection<int, InvoiceLine> $lines */
+        /** @var Collection<int, InvoiceLine> $lines */
         $lines = $invoice->getRelationValue('lines') ?? collect();
 
-        /** @var \Illuminate\Database\Eloquent\Collection<int, Payment> $payments */
+        /** @var Collection<int, Payment> $payments */
         $payments = $invoice->getRelationValue('payments') ?? collect();
 
         /** @var InvoiceSeries|null $series */
@@ -257,98 +254,7 @@ final readonly class InvoiceDocumentData
      */
     public function toViewModel(): array
     {
-        $seller = $this->seller->toArray();
-        $customer = $this->customer->toArray();
-
-        return [
-            'invoice' => new Fluent([
-                'currency' => $this->currency,
-                'document_type' => $this->documentType,
-                'status' => $this->status,
-                'number' => $this->number,
-                'issued_at' => $this->normalizeDate($this->issuedAt),
-                'due_at' => $this->normalizeDate($this->dueAt),
-                'company' => new Fluent([
-                    'legal_name' => $seller['legal_name'] ?? null,
-                    'display_name' => $seller['display_name'] ?? null,
-                    'email' => $seller['contact_email'] ?? null,
-                    'phone' => $seller['contact_phone'] ?? null,
-                    'defaultBankAccount' => $this->bankAccount ? new Fluent($this->bankAccount) : null,
-                    'defaultEstablishment' => $this->establishment ? new Fluent($this->establishment) : null,
-                ]),
-                'customer' => new Fluent([
-                    'legal_name' => $customer['legal_name'] ?? null,
-                    'full_name' => $customer['full_name'] ?? null,
-                    'reference' => $customer['reference'] ?? null,
-                    'email' => $customer['email'] ?? null,
-                    'phone' => data_get($customer, 'contact.phone'),
-                ]),
-                'seller_snapshot' => $seller,
-                'customer_snapshot' => $customer,
-                'series' => $this->series ? new Fluent($this->series) : null,
-                'reservation' => $this->reservation ? new Fluent($this->reservation) : null,
-                'lines' => Collection::make($this->lines)->map(fn (array $line): Fluent => new Fluent([
-                    'sort_order' => $line['sort_order'] ?? null,
-                    'description' => $line['description'] ?? null,
-                    'quantity' => $line['quantity'] ?? null,
-                    'unit_price' => $line['unit_price'] ?? null,
-                    'discount_amount' => $line['discount_amount'] ?? null,
-                    'tax_rate' => $line['tax_rate'] ?? null,
-                    'total_amount' => $line['total_amount'] ?? null,
-                    'product' => isset($line['product']) && is_array($line['product']) ? new Fluent($line['product']) : null,
-                ])),
-                'payments' => Collection::make($this->payments ?? [])->map(fn (array $payment): Fluent => new Fluent([
-                    'amount' => $payment['amount'] ?? null,
-                    'method' => $this->normalizePaymentMethod($payment['method'] ?? null),
-                    'status' => $this->normalizePaymentStatus($payment['status'] ?? null),
-                    'paid_at' => $this->normalizeDate($payment['paid_at'] ?? null),
-                    'reference' => $payment['reference'] ?? null,
-                    'notes' => $payment['notes'] ?? null,
-                ])),
-                'quote' => $this->quote ? new Fluent($this->quote) : null,
-                'notes' => $this->notes,
-                'public_share_token' => $this->publicShareUrl ? true : null,
-                'public_share_url' => $this->publicShareUrl,
-                'public_share_expires_at' => null,
-                'subtotal_amount' => $this->moneyValue($this->subtotal),
-                'tax_amount' => $this->moneyValue($this->taxTotal),
-                'total_amount' => $this->moneyValue($this->total),
-                'paid_amount' => $this->moneyValue($this->paidTotal),
-                'balance_due' => $this->moneyValue($this->balanceDue),
-            ]),
-        ];
-    }
-
-    private function normalizeDate(DateTimeInterface|string|null $value): ?Carbon
-    {
-        if ($value === null || $value === '') {
-            return null;
-        }
-
-        return $value instanceof DateTimeInterface ? Carbon::instance($value) : Carbon::parse($value);
-    }
-
-    private function moneyValue(?Money $money): string
-    {
-        return $money?->toDecimalString() ?? '0.00';
-    }
-
-    private function normalizePaymentMethod(mixed $method): ?PaymentMethodType
-    {
-        if ($method instanceof PaymentMethodType || $method === null || $method === '') {
-            return $method;
-        }
-
-        return PaymentMethodType::tryFrom((string) $method);
-    }
-
-    private function normalizePaymentStatus(mixed $status): ?PaymentStatus
-    {
-        if ($status instanceof PaymentStatus || $status === null || $status === '') {
-            return $status;
-        }
-
-        return PaymentStatus::tryFrom((string) $status);
+        return app(InvoiceDocumentViewModelFactory::class)->make($this);
     }
 
     private static function calculateLineTotal(object $line): Money

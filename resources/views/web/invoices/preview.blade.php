@@ -12,6 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $documentType }} {{ $invoice->number ?? __('billing::pdf.draft') }}</title>
     @include('billing::web.partials.styles')
+    @include('billing::pdf.partials.styles')
 </head>
 <body>
     @include('billing::web.invoices.content', ['document' => $document, 'shared' => $shared])

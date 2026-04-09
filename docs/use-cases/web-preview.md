@@ -27,6 +27,7 @@ return redirect()->route('billing.invoices.preview', $invoice);
 
 ## Notes
 
+- The preview and print pages render the same shared invoice document partial as the PDF.
 - The preview and print pages are built from the same billing document data as the PDF.
 - Routes are only registered when `billing.web.enabled` is `true`.
 - Public sharing uses a signed URL and a non-guessable token.

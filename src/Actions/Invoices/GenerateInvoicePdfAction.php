@@ -21,7 +21,9 @@ final class GenerateInvoicePdfAction
                 ? $document->build()
                 : $document);
 
-        return $this->renderer->render('billing::pdf.invoice', $document->toViewModel(), [
+        return $this->renderer->render('billing::pdf.invoice', [
+            'document' => $document->toViewModel(),
+        ], [
             'paper' => config('billing.pdf.paper', 'a4'),
             'orientation' => config('billing.pdf.orientation', 'portrait'),
             'locale' => $document->locale ?? config('billing.companies.default_locale', 'fr'),

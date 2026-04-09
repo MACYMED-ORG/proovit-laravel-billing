@@ -30,7 +30,7 @@ final class StreamInvoicePdfAction
                 $document->number ?? now()->format('YmdHis')
             ),
             'billing::pdf.invoice',
-            $document->toViewModel(),
+            ['document' => $document->toViewModel()],
             [
                 'paper' => config('billing.pdf.paper', 'a4'),
                 'orientation' => config('billing.pdf.orientation', 'portrait'),
