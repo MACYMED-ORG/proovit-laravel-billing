@@ -23,6 +23,7 @@ This documentation covers the `proovit/laravel-billing` package from a user and 
 - [Storage](use-cases/storage.md)
 - [Public sharing](use-cases/public-sharing.md)
 - [Demo data](use-cases/demo-data.md)
+- [Events](use-cases/events.md)
 - [Scramble documentation](use-cases/scramble.md)
 
 ## Core principles

@@ -108,6 +108,7 @@ The fluent builder is the recommended public API for applications that do not wa
 - [Storage](docs/use-cases/storage.md)
 - [Public sharing](docs/use-cases/public-sharing.md)
 - [Demo data](docs/use-cases/demo-data.md)
+- [Events](docs/use-cases/events.md)
 - [Scramble documentation](docs/use-cases/scramble.md)
 
 ## Repository layout
