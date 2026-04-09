@@ -49,6 +49,10 @@ final class BillingServiceProvider extends ServiceProvider
             'billing'
         );
 
+        if (class_exists(\Barryvdh\DomPDF\ServiceProvider::class)) {
+            $this->app->register(\Barryvdh\DomPDF\ServiceProvider::class);
+        }
+
         $this->app->singleton(Billing::class);
         $this->app->singleton(BillingConfigResolverInterface::class, ConfigBillingConfigResolver::class);
         $this->app->singleton(BillingFeatureManagerInterface::class, ConfigBillingFeatureManager::class);
