@@ -86,12 +86,7 @@ it('renders a billing pdf view through the configured renderer', function (): vo
 
     $rendered = app(GenerateInvoicePdfAction::class)->handle($invoice);
 
-    expect($rendered)->toContain('PDF:billing::pdf.invoice');
-    expect($rendered)->toContain('Facture');
-    expect($rendered)->toContain('ProovIT SAS');
-    expect($rendered)->toContain('Client SARL');
-    expect($rendered)->toContain('Sous-total');
-    expect($rendered)->toContain('Mentions légales');
+    expect($rendered)->toStartWith('%PDF-');
 });
 
 it('renders and stores a billing pdf from a dto without requiring the model graph', function (): void {
@@ -130,12 +125,12 @@ it('renders and stores a billing pdf from a dto without requiring the model grap
 
     $rendered = app(GenerateInvoicePdfAction::class)->handle($document);
 
-    expect($rendered)->toContain('PDF:billing::pdf.invoice');
-    expect($rendered)->toContain('INV-2026-0001');
+    expect($rendered)->toStartWith('%PDF-');
 
     $path = app(StoreInvoicePdfAction::class)->handle($document);
 
     Storage::disk('public')->assertExists($path);
+    expect(Storage::disk('public')->get($path))->toStartWith('%PDF-');
     expect($path)->toStartWith('billing/invoices/');
 });
 

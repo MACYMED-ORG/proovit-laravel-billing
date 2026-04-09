@@ -5,6 +5,7 @@
 - PHP 8.3
 - Laravel 13
 - Composer
+- `barryvdh/laravel-dompdf` for real PDF generation
 
 ## Install the package
 

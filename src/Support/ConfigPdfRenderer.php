@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Support;
 
+use Barryvdh\DomPDF\Facade\Pdf;
 use Proovit\Billing\Contracts\PdfRendererInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -11,45 +12,40 @@ final class ConfigPdfRenderer implements PdfRendererInterface
 {
     public function render(string $view, array $data = [], array $options = []): string
     {
+        return $this->makePdf($view, $data, $options)->output();
+    }
+
+    public function download(string $filename, string $view, array $data = [], array $options = []): Response
+    {
+        return $this->makePdf($view, $data, $options)->download($filename);
+    }
+
+    public function stream(string $filename, string $view, array $data = [], array $options = []): Response
+    {
+        return $this->makePdf($view, $data, $options)->stream($filename);
+    }
+
+    private function makePdf(string $view, array $data = [], array $options = []): \Barryvdh\DomPDF\PDF
+    {
         $locale = $options['locale'] ?? app()->getLocale();
         $previousLocale = app()->getLocale();
 
         app()->setLocale((string) $locale);
 
         try {
-            $html = view($view, $data)->render();
+            $pdf = Pdf::loadView($view, $data);
+            $pdf->setPaper(
+                $options['paper'] ?? config('billing.pdf.paper', 'a4'),
+                $options['orientation'] ?? config('billing.pdf.orientation', 'portrait')
+            );
+
+            if (isset($options['dompdf']) && is_array($options['dompdf'])) {
+                $pdf->setOptions($options['dompdf']);
+            }
+
+            return $pdf;
         } finally {
             app()->setLocale($previousLocale);
         }
-
-        return sprintf(
-            'PDF:%s:%s',
-            $view,
-            json_encode([
-                'data' => array_keys($data),
-                'options' => $options,
-                'html' => $html,
-            ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_UNICODE)
-        );
-    }
-
-    public function download(string $filename, string $view, array $data = [], array $options = []): Response
-    {
-        $content = $this->render($view, $data, $options);
-
-        return response($content, 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => sprintf('attachment; filename="%s"', $filename),
-        ]);
-    }
-
-    public function stream(string $filename, string $view, array $data = [], array $options = []): Response
-    {
-        $content = $this->render($view, $data, $options);
-
-        return response($content, 200, [
-            'Content-Type' => 'application/pdf',
-            'Content-Disposition' => sprintf('inline; filename="%s"', $filename),
-        ]);
     }
 }

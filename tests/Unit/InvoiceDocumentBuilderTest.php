@@ -46,9 +46,7 @@ it('builds and renders invoice documents with the fluent builder', function (): 
 
     $html = app(GenerateInvoicePdfAction::class)->handle($document);
 
-    expect($html)->toContain('PDF:billing::pdf.invoice');
-    expect($html)->toContain('ProovIT SAS');
-    expect($html)->toContain('Client SARL');
+    expect($html)->toStartWith('%PDF-');
 });
 
 it('builds invoice documents from drafts with contextual totals and payments', function (): void {
