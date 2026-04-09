@@ -18,19 +18,38 @@ $product = \Proovit\Billing\Models\Product::factory()->for($company)->create();
 
 The `BillingDemoSeeder` creates:
 
-- a company
-- a default establishment
-- a default bank account
-- a tax rate
-- a customer
-- a quote with line items
-- a converted invoice
+- a company with billing defaults
+- two establishments
+- two bank accounts
+- two tax rates
+- two customers with billing/shipping addresses
+- three products with prices
+- three invoice series, one for each document type
+- a quote with multiple line items
+- a converted invoice and public share link
+- a draft invoice
 - a payment and allocation
+- a credit note from the converted invoice
+- a reminder
+- a document render record
+- a Factur-X export record
+- an audit log entry
 
 Run it in an application:
 
 ```php
 app(\Proovit\Billing\Database\Seeders\BillingDemoSeeder::class)->run();
+```
+
+If you want the package demo data in your application seeders, add:
+
+```php
+use Proovit\Billing\Database\Seeders\BillingDemoSeeder;
+
+public function run(): void
+{
+    $this->call(BillingDemoSeeder::class);
+}
 ```
 
 ## Why it matters
