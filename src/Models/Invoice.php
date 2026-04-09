@@ -91,6 +91,18 @@ final class Invoice extends BillingModel
         return route('billing.public.invoices.show', ['token' => $token]);
     }
 
+    public function isEditableDraft(): bool
+    {
+        $status = $this->getAttribute('status');
+        $statusValue = $status instanceof InvoiceStatus ? $status->value : (string) $status;
+
+        $documentType = $this->getAttribute('document_type');
+        $documentTypeValue = $documentType instanceof InvoiceType ? $documentType->value : (string) $documentType;
+
+        return $documentTypeValue === InvoiceType::Invoice->value
+            && $statusValue === InvoiceStatus::Draft->value;
+    }
+
     public function lines(): HasMany
     {
         return $this->hasMany(InvoiceLine::class, 'invoice_id');
