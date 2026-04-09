@@ -14,6 +14,15 @@ composer require proovit/laravel-billing
 php artisan billing:install
 ```
 
+The `billing:install` command is recommended, not mandatory.
+
+If you skip it:
+
+- the package still loads with its default configuration
+- database migrations still load from the package when database mode is enabled
+- you can publish resources later, when you need them
+- the fluent document builder and PDF rendering remain available
+
 The installer asks about:
 
 - database-backed billing mode
@@ -35,6 +44,8 @@ When you choose not to publish resources:
 - the package keeps its own views, translations, and routes in vendor space
 
 This is useful when you want a clean installation or when you only consume the package through code.
+
+If you do not publish resources during install, you can still publish them later with `vendor:publish`.
 
 ## Database-backed mode
 
