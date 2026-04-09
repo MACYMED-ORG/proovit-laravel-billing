@@ -30,6 +30,10 @@ composer require proovit/laravel-billing
 php artisan billing:install
 ```
 
+`billing:install` is recommended, not required.
+
+You can skip it if you want to start with the package defaults and adjust the config later.
+
 The installer can:
 
 - enable or disable the database-backed stack
@@ -38,6 +42,12 @@ The installer can:
 - publish package resources when requested
 - enable or disable signed public invoice links
 - enable or disable Scramble documentation
+
+If you skip the installer:
+
+- the package still works with its defaults
+- you can publish config, views, translations, and routes later
+- you can keep the package database-backed or document-builder-only through config changes
 
 ## Quick examples
 
