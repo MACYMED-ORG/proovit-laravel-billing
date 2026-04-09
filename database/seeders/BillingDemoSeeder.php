@@ -7,11 +7,11 @@ namespace Proovit\Billing\Database\Seeders;
 use Illuminate\Database\Seeder;
 use Proovit\Billing\Actions\Invoices\CreateCreditNoteFromInvoiceAction;
 use Proovit\Billing\Actions\Invoices\CreateDraftInvoiceAction;
+use Proovit\Billing\Actions\Invoices\EnsureInvoicePdfStoredAction;
 use Proovit\Billing\Actions\Invoices\GenerateInvoiceShareLinkAction;
 use Proovit\Billing\Actions\Quotes\ConvertQuoteToInvoiceAction;
 use Proovit\Billing\Actions\Quotes\CreateQuoteAction;
 use Proovit\Billing\Builders\Documents\InvoiceDocumentBuilder;
-use Proovit\Billing\Enums\DocumentRenderType;
 use Proovit\Billing\Enums\EInvoiceFormat;
 use Proovit\Billing\Enums\InvoiceType;
 use Proovit\Billing\Enums\PaymentMethodType;
@@ -24,7 +24,6 @@ use Proovit\Billing\Models\CompanyBankAccount;
 use Proovit\Billing\Models\CompanyEstablishment;
 use Proovit\Billing\Models\Customer;
 use Proovit\Billing\Models\CustomerAddress;
-use Proovit\Billing\Models\DocumentRender;
 use Proovit\Billing\Models\EInvoiceExport;
 use Proovit\Billing\Models\InvoiceSeries;
 use Proovit\Billing\Models\Payment;
@@ -281,8 +280,27 @@ final class BillingDemoSeeder extends Seeder
         $quote->update(['status' => QuoteStatus::Sent->value]);
         $quote->refresh()->load('lines');
 
+        $quote->lines->each(function ($line) use ($implementationService, $maintenanceService, $vatStandard, $vatReduced): void {
+            if ($line->description === 'Implementation service') {
+                $line->forceFill([
+                    'product_id' => $implementationService->id,
+                    'tax_rate_id' => $vatStandard->id,
+                ])->save();
+
+                return;
+            }
+
+            if ($line->description === 'Maintenance retainer') {
+                $line->forceFill([
+                    'product_id' => $maintenanceService->id,
+                    'tax_rate_id' => $vatReduced->id,
+                ])->save();
+            }
+        });
+
         $invoice = app(ConvertQuoteToInvoiceAction::class)->handle($quote);
         app(GenerateInvoiceShareLinkAction::class)->handle($invoice, now()->addDays(30), true);
+        app(EnsureInvoicePdfStoredAction::class)->handle($invoice);
 
         $payment = Payment::factory()
             ->for($company)
@@ -330,6 +348,24 @@ final class BillingDemoSeeder extends Seeder
             $secondaryCustomer->id
         );
 
+        $draftInvoice->refresh()->load('lines');
+        $draftInvoice->lines->each(function ($line) use ($hardwareBundle, $vatStandard): void {
+            if ($line->description === 'Hardware bundle') {
+                $line->forceFill([
+                    'product_id' => $hardwareBundle->id,
+                    'tax_rate_id' => $vatStandard->id,
+                ])->save();
+
+                return;
+            }
+
+            if ($line->description === 'Setup assistance') {
+                $line->forceFill([
+                    'tax_rate_id' => $vatStandard->id,
+                ])->save();
+            }
+        });
+
         Reminder::factory()
             ->for($company)
             ->for($invoice)
@@ -337,16 +373,6 @@ final class BillingDemoSeeder extends Seeder
                 'channel' => ReminderChannel::Email->value,
                 'status' => 'sent',
                 'sent_at' => now()->subDay(),
-            ]);
-
-        DocumentRender::factory()
-            ->for($company)
-            ->for($invoice)
-            ->create([
-                'document_type' => InvoiceType::Invoice->value,
-                'render_type' => DocumentRenderType::Pdf->value,
-                'path' => 'billing/invoices/'.$invoice->id.'/invoice.pdf',
-                'size_bytes' => 4096,
             ]);
 
         EInvoiceExport::factory()

@@ -7,7 +7,6 @@ use Proovit\Billing\Enums\InvoiceStatus;
 use Proovit\Billing\Enums\InvoiceType;
 use Proovit\Billing\Enums\QuoteStatus;
 use Proovit\Billing\Models\CreditNote;
-use Proovit\Billing\Models\CreditNoteLine;
 use Proovit\Billing\Models\Invoice;
 use Proovit\Billing\Models\InvoiceLine;
 use Proovit\Billing\Models\Quote;

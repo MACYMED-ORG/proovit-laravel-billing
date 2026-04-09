@@ -77,6 +77,8 @@ final class ConvertQuoteToInvoiceAction
             foreach ($quote->lines as $index => $line) {
                 InvoiceLine::create([
                     'invoice_id' => $invoice->id,
+                    'product_id' => $line->getAttribute('product_id'),
+                    'tax_rate_id' => $line->getAttribute('tax_rate_id'),
                     'description' => $line->description,
                     'quantity' => $line->quantity,
                     'unit_price' => $line->unit_price,
