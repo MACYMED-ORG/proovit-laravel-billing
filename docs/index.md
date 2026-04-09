@@ -8,6 +8,7 @@ This documentation covers the `proovit/laravel-billing` package from a user and 
 - [Configuration](configuration.md)
 - [HTTP API](api.md)
 - [Authentication](authentication.md)
+- [Release process](release-process.md)
 - [Release notes](release-notes.md)
 - [FAQ](faq.md)
 

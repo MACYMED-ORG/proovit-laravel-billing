@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Proovit\Billing\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Proovit\Billing\Models\Concerns\CalculatesLineAmounts;
 
 /**
  * @property-read Quote|null $quote
@@ -20,6 +21,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 final class QuoteLine extends BillingModel
 {
+    use CalculatesLineAmounts;
+
     protected $table = 'billing_quote_lines';
 
     protected $guarded = [];

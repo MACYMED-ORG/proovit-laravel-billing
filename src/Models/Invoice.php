@@ -103,6 +103,11 @@ final class Invoice extends BillingModel
             && $statusValue === InvoiceStatus::Draft->value;
     }
 
+    public function canManageLineItems(): bool
+    {
+        return $this->isEditableDraft();
+    }
+
     public function lines(): HasMany
     {
         return $this->hasMany(InvoiceLine::class, 'invoice_id');

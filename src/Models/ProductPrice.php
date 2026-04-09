@@ -6,6 +6,10 @@ namespace Proovit\Billing\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property-read string|null $amount
+ * @property-read string|null $currency
+ */
 final class ProductPrice extends BillingModel
 {
     protected $table = 'billing_product_prices';

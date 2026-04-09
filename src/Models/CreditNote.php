@@ -37,4 +37,12 @@ final class CreditNote extends BillingModel
     {
         return $this->hasMany(CreditNoteLine::class, 'credit_note_id');
     }
+
+    public function canManageLineItems(): bool
+    {
+        $status = $this->getAttribute('status');
+        $statusValue = $status instanceof CreditNoteStatus ? $status->value : (string) $status;
+
+        return $statusValue === CreditNoteStatus::Draft->value;
+    }
 }

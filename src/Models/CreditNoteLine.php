@@ -5,9 +5,12 @@ declare(strict_types=1);
 namespace Proovit\Billing\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Proovit\Billing\Models\Concerns\CalculatesLineAmounts;
 
 final class CreditNoteLine extends BillingModel
 {
+    use CalculatesLineAmounts;
+
     protected $table = 'billing_credit_note_lines';
 
     protected $guarded = [];

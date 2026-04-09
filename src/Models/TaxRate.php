@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property-read string|null $rate
+ */
 final class TaxRate extends BillingModel
 {
     protected $table = 'billing_tax_rates';

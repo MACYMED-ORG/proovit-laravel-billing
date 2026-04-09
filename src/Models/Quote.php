@@ -55,4 +55,13 @@ final class Quote extends BillingModel
     {
         return $this->belongsTo(Invoice::class, 'converted_invoice_id');
     }
+
+    public function canManageLineItems(): bool
+    {
+        $status = $this->getAttribute('status');
+        $statusValue = $status instanceof QuoteStatus ? $status->value : (string) $status;
+
+        return $this->getAttribute('converted_invoice_id') === null
+            && in_array($statusValue, [QuoteStatus::Draft->value, QuoteStatus::Sent->value], true);
+    }
 }

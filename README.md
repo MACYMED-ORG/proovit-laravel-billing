@@ -93,6 +93,7 @@ The fluent builder is the recommended public API for applications that do not wa
 - [Configuration](docs/configuration.md)
 - [HTTP API](docs/api.md)
 - [Authentication](docs/authentication.md)
+- [Release process](docs/release-process.md)
 - [Release notes](docs/release-notes.md)
 - [FAQ](docs/faq.md)
 
@@ -151,6 +152,9 @@ The fluent builder is the recommended public API for applications that do not wa
 - HTTP access uses `uuid_identifier`, not the numeric primary key.
 - Controllers are single-action `__invoke` classes.
 - Scramble docs are exposed on a configurable path so they do not overwrite the host application's docs.
+- `dev` is the integration branch; tags are cut from `main`.
+- Core and Filament releases should share the same tag when they are released together.
+- If only `filament-billing` changes, use the fourth numeric segment for plugin-only tags.
 - AI, MCP, and Filament documentation belongs to their respective packages, not this one.
 - The package `Makefile` only covers package-local QA; sandbox commands live at the repository root.
 
