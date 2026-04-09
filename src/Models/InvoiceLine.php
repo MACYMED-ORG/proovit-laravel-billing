@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Proovit\Billing\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Proovit\Billing\Models\Concerns\CalculatesLineAmounts;
 
 /**
  * @property-read Invoice|null $invoice
@@ -22,6 +23,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  */
 final class InvoiceLine extends BillingModel
 {
+    use CalculatesLineAmounts;
+
     protected $table = 'billing_invoice_lines';
 
     protected $guarded = [];

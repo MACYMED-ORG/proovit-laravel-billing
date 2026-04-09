@@ -30,6 +30,8 @@ final class CreateCreditNoteFromInvoiceAction
             foreach ($invoice->lines as $line) {
                 CreditNoteLine::create([
                     'credit_note_id' => $creditNote->id,
+                    'product_id' => $line->getAttribute('product_id'),
+                    'tax_rate_id' => $line->getAttribute('tax_rate_id'),
                     'description' => $line->description,
                     'quantity' => $line->quantity,
                     'unit_price' => $line->unit_price,

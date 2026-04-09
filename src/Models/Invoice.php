@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Proovit\Billing\Enums\DocumentRenderType;
 use Proovit\Billing\Enums\InvoiceStatus;
 use Proovit\Billing\Enums\InvoiceType;
 
@@ -91,6 +92,23 @@ final class Invoice extends BillingModel
         return route('billing.public.invoices.show', ['token' => $token]);
     }
 
+    public function isEditableDraft(): bool
+    {
+        $status = $this->getAttribute('status');
+        $statusValue = $status instanceof InvoiceStatus ? $status->value : (string) $status;
+
+        $documentType = $this->getAttribute('document_type');
+        $documentTypeValue = $documentType instanceof InvoiceType ? $documentType->value : (string) $documentType;
+
+        return $documentTypeValue === InvoiceType::Invoice->value
+            && $statusValue === InvoiceStatus::Draft->value;
+    }
+
+    public function canManageLineItems(): bool
+    {
+        return $this->isEditableDraft();
+    }
+
     public function lines(): HasMany
     {
         return $this->hasMany(InvoiceLine::class, 'invoice_id');
@@ -99,6 +117,32 @@ final class Invoice extends BillingModel
     public function payments(): HasMany
     {
         return $this->hasMany(Payment::class, 'invoice_id');
+    }
+
+    public function documentRenders(): HasMany
+    {
+        return $this->hasMany(DocumentRender::class, 'invoice_id');
+    }
+
+    public function latestPdfDocumentRender(): ?DocumentRender
+    {
+        /** @var DocumentRender|null $documentRender */
+        $documentRender = $this->documentRenders()
+            ->where('render_type', DocumentRenderType::Pdf->value)
+            ->latest('id')
+            ->first();
+
+        return $documentRender;
+    }
+
+    public function latestPdfDocumentRenderPath(): ?string
+    {
+        return $this->latestPdfDocumentRender()?->getAttribute('path');
+    }
+
+    public function getLatestPdfDocumentRenderPathAttribute(): ?string
+    {
+        return $this->latestPdfDocumentRender()?->getAttribute('path');
     }
 
     public function scopeDraft(Builder $query): Builder

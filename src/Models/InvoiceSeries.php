@@ -35,4 +35,9 @@ final class InvoiceSeries extends BillingModel
     {
         return $this->hasMany(InvoiceNumberReservation::class, 'invoice_series_id');
     }
+
+    public function invoices(): HasMany
+    {
+        return $this->hasMany(Invoice::class, 'invoice_series_id');
+    }
 }
