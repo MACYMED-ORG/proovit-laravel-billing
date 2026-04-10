@@ -6,7 +6,13 @@ namespace Proovit\Billing\Http\Resources\Api\Customers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Proovit\Billing\Http\Resources\Api\Shared\CompanyResource;
+use Proovit\Billing\Http\Resources\Api\Shared\CustomerAddressResource;
+use Proovit\Billing\Models\Customer;
 
+/**
+ * @mixin Customer
+ */
 final class CustomerResource extends JsonResource
 {
     public function toArray(Request $request): array
@@ -24,26 +30,11 @@ final class CustomerResource extends JsonResource
             'billing_address' => $this->billing_address,
             'shipping_address' => $this->shipping_address,
             'addresses' => $this->resource->relationLoaded('addresses')
-                ? $this->addresses->map(fn ($address): array => [
-                    'id' => $address->id,
-                    'uuid_identifier' => $address->uuid_identifier,
-                    'label' => $address->label,
-                    'line1' => $address->line1,
-                    'line2' => $address->line2,
-                    'postal_code' => $address->postal_code,
-                    'city' => $address->city,
-                    'region' => $address->region,
-                    'country' => $address->country,
-                    'is_default_billing' => (bool) $address->is_default_billing,
-                    'is_default_shipping' => (bool) $address->is_default_shipping,
-                ])->all()
+                ? CustomerAddressResource::collection($this->addresses)
                 : null,
-            'company' => $this->resource->relationLoaded('company') ? [
-                'id' => $this->company?->id,
-                'uuid_identifier' => $this->company?->uuid_identifier,
-                'legal_name' => $this->company?->legal_name,
-                'display_name' => $this->company?->display_name,
-            ] : null,
+            'company' => $this->resource->relationLoaded('company')
+                ? CompanyResource::make($this->company)
+                : null,
         ];
     }
 }

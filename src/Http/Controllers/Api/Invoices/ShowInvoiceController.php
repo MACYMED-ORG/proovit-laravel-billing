@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Http\Controllers\Api\Invoices;
 
-use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Endpoint;
+use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Routing\Controller;
 use Proovit\Billing\Http\Resources\Api\Invoices\InvoiceResource;
@@ -22,6 +22,6 @@ final class ShowInvoiceController extends Controller
     #[Response(type: 'Proovit\Billing\Http\Resources\Api\Invoices\InvoiceResource', description: 'Single invoice with company, customer, series, reservation, quote, lines, payments, totals, and share link data.')]
     public function __invoke(Invoice $invoice): InvoiceResource
     {
-        return new InvoiceResource($invoice->loadMissing(['company', 'customer', 'series', 'reservation', 'quote', 'lines', 'payments.allocations']));
+        return new InvoiceResource($invoice->loadMissing(['company', 'customer', 'series', 'reservation', 'quote', 'lines', 'payments.invoice', 'payments.allocations']));
     }
 }

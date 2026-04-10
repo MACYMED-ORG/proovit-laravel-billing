@@ -81,9 +81,9 @@ The documentation also defines explicit endpoint titles and descriptions so Scra
 
 The generated Scramble docs follow the response shape returned by the controllers and resources:
 
-- customers return customer data with company and address context
-- invoices return seller and customer snapshots, totals, series, quote links, lines, and payments
-- quotes return the quote snapshot, line items, totals, and converted invoice linkage
+- customers return customer data with company and address context, including explicit address and company sub-resources
+- invoices return seller and customer snapshots, totals, series, quote links, lines, and payments, with nested invoice references and totals rendered as dedicated sub-resources
+- quotes return the quote snapshot, line items, totals, and converted invoice linkage, again as explicit nested resources
 - system status returns a small `data` object with `loaded`, `locale`, and `version`
 
 ## Endpoint response map

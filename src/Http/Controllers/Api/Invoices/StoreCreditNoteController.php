@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Http\Controllers\Api\Invoices;
 
-use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Endpoint;
+use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -26,6 +26,6 @@ final class StoreCreditNoteController extends Controller
     {
         $creditNote = $createCreditNote->handle($invoice->loadMissing(['lines']));
 
-        return (new CreditNoteResource($creditNote->loadMissing(['lines'])))->response()->setStatusCode(201);
+        return (new CreditNoteResource($creditNote->loadMissing(['lines', 'invoice', 'company'])))->response()->setStatusCode(201);
     }
 }

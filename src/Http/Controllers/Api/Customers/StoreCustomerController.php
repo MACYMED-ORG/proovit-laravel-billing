@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Http\Controllers\Api\Customers;
 
-use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Endpoint;
+use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Http\Controllers\Api\Customers;
 
-use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Endpoint;
+use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -21,7 +21,7 @@ final class ListCustomersController extends Controller
         title: 'List customers',
         description: 'Return the paginated customer directory for the selected billing company.'
     )]
-    #[Response(description: 'Paginated customers with company, addresses, billing identifiers, and contact data.')]
+    #[Response(type: 'Illuminate\Http\Resources\Json\AnonymousResourceCollection<Proovit\Billing\Http\Resources\Api\Customers\CustomerResource>', description: 'Paginated customers with company, addresses, billing identifiers, and contact data.')]
     public function __invoke(Request $request, ListCustomersAction $listCustomersAction): AnonymousResourceCollection
     {
         return CustomerResource::collection(

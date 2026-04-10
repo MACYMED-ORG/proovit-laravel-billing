@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Http\Controllers\Api\Invoices;
 
-use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Endpoint;
+use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Routing\Controller;
 use Proovit\Billing\Actions\Invoices\UpdateDraftInvoiceAction;
@@ -37,7 +37,7 @@ final class UpdateDraftInvoiceController extends Controller
                 $mapper->map($payload),
                 $companyId,
                 $customerId,
-            )->loadMissing(['company', 'customer', 'series', 'reservation', 'quote', 'lines', 'payments.allocations'])
+            )->loadMissing(['company', 'customer', 'series', 'reservation', 'quote', 'lines', 'payments.invoice', 'payments.allocations'])
         );
     }
 

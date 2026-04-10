@@ -6,13 +6,21 @@ namespace Proovit\Billing\Http\Resources\Api\Invoices;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Proovit\Billing\Models\InvoiceLine;
 
+/**
+ * @mixin InvoiceLine
+ */
 final class InvoiceLineResource extends JsonResource
 {
     public function toArray(Request $request): array
     {
         return [
             'id' => $this->id,
+            'uuid_identifier' => $this->uuid_identifier,
+            'invoice_id' => $this->invoice_id,
+            'product_id' => $this->product_id,
+            'tax_rate_id' => $this->tax_rate_id,
             'description' => $this->description,
             'quantity' => $this->quantity,
             'unit_price' => $this->unit_price,

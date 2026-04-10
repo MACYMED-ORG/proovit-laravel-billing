@@ -6,7 +6,13 @@ namespace Proovit\Billing\Http\Resources\Api\Invoices;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Proovit\Billing\Http\Resources\Api\Customers\CustomerResource;
+use Proovit\Billing\Http\Resources\Api\Shared\CompanyResource;
+use Proovit\Billing\Models\Invoice;
 
+/**
+ * @mixin Invoice
+ */
 final class InvoiceResource extends JsonResource
 {
     public function toArray(Request $request): array
@@ -39,52 +45,36 @@ final class InvoiceResource extends JsonResource
             'finalized_at' => $this->finalized_at?->toIso8601String(),
             'seller_snapshot' => $this->seller_snapshot,
             'customer_snapshot' => $this->customer_snapshot,
-            'series' => $this->series ? [
-                'id' => $this->series->id,
-                'name' => $this->series->name,
-                'prefix' => $this->series->prefix,
-                'pattern' => $this->series->pattern,
-                'current_sequence' => $this->series->current_sequence,
-            ] : null,
-            'reservation' => $this->reservation ? [
-                'id' => $this->reservation->id,
-                'number' => $this->reservation->number,
-                'sequence' => $this->reservation->sequence,
-                'reserved_at' => $this->reservation->reserved_at?->toIso8601String(),
-                'consumed_at' => $this->reservation->consumed_at?->toIso8601String(),
-            ] : null,
-            'quote' => $this->resource->relationLoaded('quote') ? [
-                'id' => $this->quote?->id,
-                'uuid_identifier' => $this->quote?->uuid_identifier,
-                'number' => $this->quote?->number,
-                'status' => $this->quote?->status?->value,
-            ] : ($this->quote_id ? [
-                'id' => $this->quote_id,
-            ] : null),
-            'totals' => [
+            'series' => $this->resource->relationLoaded('series')
+                ? InvoiceSeriesResource::make($this->series)
+                : null,
+            'reservation' => $this->resource->relationLoaded('reservation')
+                ? InvoiceNumberReservationResource::make($this->reservation)
+                : null,
+            'quote' => $this->resource->relationLoaded('quote')
+                ? InvoiceReferenceResource::make($this->quote)
+                : ($this->quote_id ? [
+                    'id' => $this->quote_id,
+                ] : null),
+            'totals' => InvoiceTotalsResource::make([
                 'subtotal_amount' => $this->subtotal_amount,
                 'tax_amount' => $this->tax_amount,
                 'total_amount' => $this->total_amount,
                 'paid_amount' => number_format((float) $paidTotal, 2, '.', ''),
                 'balance_due' => number_format($balance, 2, '.', ''),
-            ],
-            'company' => $this->resource->relationLoaded('company') ? [
-                'id' => $this->company?->id,
-                'legal_name' => $this->company?->legal_name,
-                'display_name' => $this->company?->display_name,
-                'email' => $this->company?->email,
-                'phone' => $this->company?->phone,
-            ] : null,
-            'customer' => $this->resource->relationLoaded('customer') ? [
-                'id' => $this->customer?->id,
-                'legal_name' => $this->customer?->legal_name,
-                'full_name' => $this->customer?->full_name,
-                'reference' => $this->customer?->reference,
-                'email' => $this->customer?->email,
-                'phone' => $this->customer?->phone,
-            ] : null,
-            'lines' => InvoiceLineResource::collection($this->whenLoaded('lines')),
-            'payments' => PaymentResource::collection($this->whenLoaded('payments')),
+            ]),
+            'company' => $this->resource->relationLoaded('company')
+                ? CompanyResource::make($this->company)
+                : null,
+            'customer' => $this->resource->relationLoaded('customer')
+                ? CustomerResource::make($this->customer)
+                : null,
+            'lines' => $this->resource->relationLoaded('lines')
+                ? InvoiceLineResource::collection($this->lines)
+                : null,
+            'payments' => $this->resource->relationLoaded('payments')
+                ? PaymentResource::collection($this->payments)
+                : null,
         ];
     }
 }

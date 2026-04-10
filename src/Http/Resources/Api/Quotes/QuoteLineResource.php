@@ -6,7 +6,11 @@ namespace Proovit\Billing\Http\Resources\Api\Quotes;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Proovit\Billing\Models\QuoteLine;
 
+/**
+ * @mixin QuoteLine
+ */
 final class QuoteLineResource extends JsonResource
 {
     public function toArray(Request $request): array
@@ -14,6 +18,9 @@ final class QuoteLineResource extends JsonResource
         return [
             'id' => $this->id,
             'uuid_identifier' => $this->uuid_identifier,
+            'quote_id' => $this->quote_id,
+            'product_id' => $this->product_id,
+            'tax_rate_id' => $this->tax_rate_id,
             'description' => $this->description,
             'quantity' => $this->quantity,
             'unit_price' => $this->unit_price,

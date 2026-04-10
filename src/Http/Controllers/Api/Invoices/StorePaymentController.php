@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Http\Controllers\Api\Invoices;
 
-use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Endpoint;
+use Dedoc\Scramble\Attributes\Group;
 use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
@@ -35,7 +35,7 @@ final class StorePaymentController extends Controller
             $this->resolveCustomerId($payload)
         );
 
-        return (new PaymentResource($payment->loadMissing(['allocations'])))->response()->setStatusCode(201);
+        return (new PaymentResource($payment->loadMissing(['allocations', 'invoice'])))->response()->setStatusCode(201);
     }
 
     /**

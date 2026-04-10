@@ -41,12 +41,12 @@ The title is what Scramble shows in the endpoint list, while the description exp
 
 Scramble response annotations are used to describe the actual payload returned by each route:
 
-- customer endpoints return a `CustomerResource`
+- customer endpoints return a paginated `CustomerResource` collection or a single `CustomerResource`
 - invoice endpoints return an `InvoiceResource`, `PaymentResource`, `CreditNoteResource`, or a small `data` envelope for share-link operations
-- quote endpoints return a `QuoteResource` or an `InvoiceResource` when a quote is converted
+- quote endpoints return a paginated `QuoteResource` collection, a `QuoteResource`, or an `InvoiceResource` when a quote is converted
 - the system endpoint returns a compact status object with `loaded`, `locale`, and `version`
 
-This keeps the generated API docs aligned with the real JSON returned by the controllers.
+The package uses dedicated sub-resources for nested objects such as `company`, `customer`, `series`, `reservation`, `totals`, and `invoice` references so the generated OpenAPI body mirrors the real JSON shape instead of collapsing to anonymous arrays.
 
 ## Installer behavior
 
