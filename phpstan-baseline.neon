@@ -337,91 +337,13 @@ parameters:
 			path: src/Http/Controllers/Api/Invoices/GenerateInvoiceShareLinkController.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$addresses\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$billing_address\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$company\.$#'
-			identifier: property.notFound
-			count: 4
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Customers/CustomerResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$email\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$full_name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$legal_name\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$phone\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$reference\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$shipping_address\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$uuid_identifier\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Customers\\CustomerResource\:\:\$vat_number\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Customers/CustomerResource.php
-
-		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\CreditNoteResource\:\:\$company_id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/CreditNoteResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\CreditNoteResource\:\:\$id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Invoices/CreditNoteResource.php
@@ -463,87 +385,45 @@ parameters:
 			path: src/Http/Resources/Api/Invoices/CreditNoteResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$description\.$#'
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$invoice_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Invoices/InvoiceLineResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$discount_amount\.$#'
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$product_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Invoices/InvoiceLineResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$id\.$#'
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$tax_rate_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Invoices/InvoiceLineResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$quantity\.$#'
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceNumberReservationResource\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceLineResource.php
+			path: src/Http/Resources/Api/Invoices/InvoiceNumberReservationResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$sort_order\.$#'
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceNumberReservationResource\:\:\$invoice_series_id\.$#'
 			identifier: property.notFound
 			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceLineResource.php
+			path: src/Http/Resources/Api/Invoices/InvoiceNumberReservationResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$subtotal_amount\.$#'
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceReferenceResource\:\:\$status\.$#'
 			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$tax_amount\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$tax_rate\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$total_amount\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceLineResource\:\:\$unit_price\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$company\.$#'
-			identifier: property.notFound
-			count: 5
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
+			count: 2
+			path: src/Http/Resources/Api/Invoices/InvoiceReferenceResource.php
 
 		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$currency\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$customer\.$#'
-			identifier: property.notFound
-			count: 6
 			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
 
 		-
@@ -577,12 +457,6 @@ parameters:
 			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
-
-		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$invoice_number_reservation_id\.$#'
 			identifier: property.notFound
 			count: 1
@@ -596,12 +470,6 @@ parameters:
 
 		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$issued_at\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$number\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
@@ -625,31 +493,13 @@ parameters:
 			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$quote\.$#'
-			identifier: property.notFound
-			count: 4
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
-
-		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$quote_id\.$#'
 			identifier: property.notFound
 			count: 2
 			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$reservation\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
-
-		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$seller_snapshot\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$series\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
@@ -661,34 +511,16 @@ parameters:
 			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$subtotal_amount\.$#'
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceSeriesResource\:\:\$company_id\.$#'
 			identifier: property.notFound
 			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
+			path: src/Http/Resources/Api/Invoices/InvoiceSeriesResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$tax_amount\.$#'
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceSeriesResource\:\:\$establishment_id\.$#'
 			identifier: property.notFound
 			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:\$total_amount\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
-
-		-
-			message: '#^Call to an undefined method Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\InvoiceResource\:\:publicShareUrl\(\)\.$#'
-			identifier: method.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/InvoiceResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\PaymentResource\:\:\$amount\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/PaymentResource.php
+			path: src/Http/Resources/Api/Invoices/InvoiceSeriesResource.php
 
 		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\PaymentResource\:\:\$company_id\.$#'
@@ -709,55 +541,19 @@ parameters:
 			path: src/Http/Resources/Api/Invoices/PaymentResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\PaymentResource\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/PaymentResource.php
-
-		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\PaymentResource\:\:\$invoice_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Invoices/PaymentResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\PaymentResource\:\:\$method\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Http/Resources/Api/Invoices/PaymentResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\PaymentResource\:\:\$paid_at\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Invoices/PaymentResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Invoices\\PaymentResource\:\:\$status\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Http/Resources/Api/Invoices/PaymentResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$description\.$#'
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$product_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Quotes/QuoteLineResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$discount_amount\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$quantity\.$#'
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$quote_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Quotes/QuoteLineResource.php
@@ -769,46 +565,10 @@ parameters:
 			path: src/Http/Resources/Api/Quotes/QuoteLineResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$subtotal_amount\.$#'
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$tax_rate_id\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Quotes/QuoteLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$tax_amount\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$tax_rate\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$total_amount\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$unit_price\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteLineResource\:\:\$uuid_identifier\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteLineResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$company\.$#'
-			identifier: property.notFound
-			count: 4
-			path: src/Http/Resources/Api/Quotes/QuoteResource.php
 
 		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$company_id\.$#'
@@ -817,21 +577,9 @@ parameters:
 			path: src/Http/Resources/Api/Quotes/QuoteResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$convertedInvoice\.$#'
-			identifier: property.notFound
-			count: 3
-			path: src/Http/Resources/Api/Quotes/QuoteResource.php
-
-		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$converted_invoice_id\.$#'
 			identifier: property.notFound
 			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$customer\.$#'
-			identifier: property.notFound
-			count: 5
 			path: src/Http/Resources/Api/Quotes/QuoteResource.php
 
 		-
@@ -847,49 +595,7 @@ parameters:
 			path: src/Http/Resources/Api/Quotes/QuoteResource.php
 
 		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$id\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$number\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteResource.php
-
-		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$seller_snapshot\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$status\.$#'
-			identifier: property.notFound
-			count: 2
-			path: src/Http/Resources/Api/Quotes/QuoteResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$subtotal_amount\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$tax_amount\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$total_amount\.$#'
-			identifier: property.notFound
-			count: 1
-			path: src/Http/Resources/Api/Quotes/QuoteResource.php
-
-		-
-			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Quotes\\QuoteResource\:\:\$uuid_identifier\.$#'
 			identifier: property.notFound
 			count: 1
 			path: src/Http/Resources/Api/Quotes/QuoteResource.php
@@ -899,6 +605,60 @@ parameters:
 			identifier: nullsafe.neverNull
 			count: 1
 			path: src/Http/Resources/Api/Quotes/QuoteResource.php
+
+		-
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Shared\\CustomerAddressResource\:\:\$city\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Http/Resources/Api/Shared/CustomerAddressResource.php
+
+		-
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Shared\\CustomerAddressResource\:\:\$country\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Http/Resources/Api/Shared/CustomerAddressResource.php
+
+		-
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Shared\\CustomerAddressResource\:\:\$is_default_billing\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Http/Resources/Api/Shared/CustomerAddressResource.php
+
+		-
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Shared\\CustomerAddressResource\:\:\$is_default_shipping\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Http/Resources/Api/Shared/CustomerAddressResource.php
+
+		-
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Shared\\CustomerAddressResource\:\:\$label\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Http/Resources/Api/Shared/CustomerAddressResource.php
+
+		-
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Shared\\CustomerAddressResource\:\:\$line1\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Http/Resources/Api/Shared/CustomerAddressResource.php
+
+		-
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Shared\\CustomerAddressResource\:\:\$line2\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Http/Resources/Api/Shared/CustomerAddressResource.php
+
+		-
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Shared\\CustomerAddressResource\:\:\$postal_code\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Http/Resources/Api/Shared/CustomerAddressResource.php
+
+		-
+			message: '#^Access to an undefined property Proovit\\Billing\\Http\\Resources\\Api\\Shared\\CustomerAddressResource\:\:\$region\.$#'
+			identifier: property.notFound
+			count: 1
+			path: src/Http/Resources/Api/Shared/CustomerAddressResource.php
 
 		-
 			message: '#^Access to an undefined property Proovit\\Billing\\Models\\Invoice\:\:\$public_share_token\.$#'

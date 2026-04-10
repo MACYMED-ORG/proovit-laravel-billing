@@ -140,6 +140,11 @@ The fluent builder is the recommended public API for applications that do not wa
 
 ## Release notes
 
+### 1.0.6
+
+- Improved Scramble response schemas so API documentation shows the real JSON payloads
+- Added clearer API and documentation wiring for the billing panel
+
 ### 1.0.1
 
 - Added a downloadable sample PDF generated from the default invoice Blade views
@@ -167,6 +172,13 @@ The fluent builder is the recommended public API for applications that do not wa
 - If only `filament-billing` changes, use the fourth numeric segment for plugin-only tags.
 - AI, MCP, and Filament documentation belongs to their respective packages, not this one.
 - The package `Makefile` only covers package-local QA; sandbox commands live at the repository root.
+
+## Release notes
+
+### 1.0.6
+
+- Improved Scramble response schemas so API documentation shows the real JSON payloads
+- Added clearer API and documentation wiring for the billing panel
 
 ## Acknowledgements
 

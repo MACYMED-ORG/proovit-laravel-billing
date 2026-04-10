@@ -6,7 +6,14 @@ namespace Proovit\Billing\Http\Resources\Api\Quotes;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Proovit\Billing\Http\Resources\Api\Customers\CustomerResource;
+use Proovit\Billing\Http\Resources\Api\Invoices\InvoiceReferenceResource;
+use Proovit\Billing\Http\Resources\Api\Shared\CompanyResource;
+use Proovit\Billing\Models\Quote;
 
+/**
+ * @mixin Quote
+ */
 final class QuoteResource extends JsonResource
 {
     public function toArray(Request $request): array
@@ -26,25 +33,18 @@ final class QuoteResource extends JsonResource
             'subtotal_amount' => $this->subtotal_amount,
             'tax_amount' => $this->tax_amount,
             'total_amount' => $this->total_amount,
-            'company' => $this->resource->relationLoaded('company') ? [
-                'id' => $this->company?->id,
-                'uuid_identifier' => $this->company?->uuid_identifier,
-                'legal_name' => $this->company?->legal_name,
-                'display_name' => $this->company?->display_name,
-            ] : null,
-            'customer' => $this->resource->relationLoaded('customer') ? [
-                'id' => $this->customer?->id,
-                'uuid_identifier' => $this->customer?->uuid_identifier,
-                'legal_name' => $this->customer?->legal_name,
-                'full_name' => $this->customer?->full_name,
-                'reference' => $this->customer?->reference,
-            ] : null,
-            'converted_invoice' => $this->resource->relationLoaded('convertedInvoice') ? [
-                'id' => $this->convertedInvoice?->id,
-                'uuid_identifier' => $this->convertedInvoice?->uuid_identifier,
-                'number' => $this->convertedInvoice?->number,
-            ] : null,
-            'lines' => QuoteLineResource::collection($this->whenLoaded('lines')),
+            'company' => $this->resource->relationLoaded('company')
+                ? CompanyResource::make($this->company)
+                : null,
+            'customer' => $this->resource->relationLoaded('customer')
+                ? CustomerResource::make($this->customer)
+                : null,
+            'converted_invoice' => $this->resource->relationLoaded('convertedInvoice')
+                ? InvoiceReferenceResource::make($this->convertedInvoice)
+                : null,
+            'lines' => $this->resource->relationLoaded('lines')
+                ? QuoteLineResource::collection($this->lines)
+                : null,
         ];
     }
 }

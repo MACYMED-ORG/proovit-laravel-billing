@@ -1,5 +1,10 @@
 # Release Notes
 
+## 1.0.6
+
+- Improved Scramble response schemas so API documentation shows the real JSON payloads
+- Added clearer API and documentation wiring for the billing panel
+
 ## 1.0.1
 
 - Added a downloadable sample invoice PDF generated from the default Blade views

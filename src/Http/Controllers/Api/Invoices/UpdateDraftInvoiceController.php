@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Http\Controllers\Api\Invoices;
 
+use Dedoc\Scramble\Attributes\Endpoint;
 use Dedoc\Scramble\Attributes\Group;
+use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Routing\Controller;
 use Proovit\Billing\Actions\Invoices\UpdateDraftInvoiceAction;
 use Proovit\Billing\Http\Requests\Api\Invoices\UpdateDraftInvoiceRequest;
@@ -14,9 +16,15 @@ use Proovit\Billing\Models\Customer;
 use Proovit\Billing\Models\Invoice;
 use Proovit\Billing\Support\InvoiceDraftPayloadMapper;
 
-#[Group('Invoices')]
+#[Group('Invoices', description: 'Manage invoices, payments, credit notes, and public share links.')]
 final class UpdateDraftInvoiceController extends Controller
 {
+    #[Endpoint(
+        operationId: 'updateDraftInvoice',
+        title: 'Update draft invoice',
+        description: 'Update a draft invoice before finalization and refresh all calculated totals.'
+    )]
+    #[Response(type: 'Proovit\Billing\Http\Resources\Api\Invoices\InvoiceResource', description: 'Updated draft invoice with recalculated totals, refreshed relations, and snapshot data.')]
     public function __invoke(UpdateDraftInvoiceRequest $request, Invoice $invoice, UpdateDraftInvoiceAction $updateDraftInvoiceAction, InvoiceDraftPayloadMapper $mapper): InvoiceResource
     {
         $payload = $request->validated();
@@ -29,7 +37,7 @@ final class UpdateDraftInvoiceController extends Controller
                 $mapper->map($payload),
                 $companyId,
                 $customerId,
-            )->loadMissing(['company', 'customer', 'series', 'reservation', 'quote', 'lines', 'payments.allocations'])
+            )->loadMissing(['company', 'customer', 'series', 'reservation', 'quote', 'lines', 'payments.invoice', 'payments.allocations'])
         );
     }
 

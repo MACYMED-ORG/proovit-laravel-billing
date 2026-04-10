@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Http\Controllers\Api\Invoices;
 
+use Dedoc\Scramble\Attributes\Endpoint;
 use Dedoc\Scramble\Attributes\Group;
+use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Routing\Controller;
 use Proovit\Billing\Actions\Invoices\FinalizeInvoiceAction;
 use Proovit\Billing\Http\Requests\Api\Invoices\FinalizeInvoiceRequest;
@@ -12,9 +14,15 @@ use Proovit\Billing\Http\Resources\Api\Invoices\InvoiceResource;
 use Proovit\Billing\Models\Invoice;
 use Proovit\Billing\Models\InvoiceSeries;
 
-#[Group('Invoices')]
+#[Group('Invoices', description: 'Manage invoices, payments, credit notes, and public share links.')]
 final class FinalizeInvoiceController extends Controller
 {
+    #[Endpoint(
+        operationId: 'finalizeInvoice',
+        title: 'Finalize invoice',
+        description: 'Reserve the final number, seal the invoice, and transition it out of draft.'
+    )]
+    #[Response(type: 'Proovit\Billing\Http\Resources\Api\Invoices\InvoiceResource', description: 'Finalized invoice with number reservation, series assignment, quote linkage, lines, and payment relations.')]
     public function __invoke(FinalizeInvoiceRequest $request, Invoice $invoice, FinalizeInvoiceAction $finalizeInvoice): InvoiceResource
     {
         $payload = $request->validated();

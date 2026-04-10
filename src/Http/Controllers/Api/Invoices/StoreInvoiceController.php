@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Proovit\Billing\Http\Controllers\Api\Invoices;
 
+use Dedoc\Scramble\Attributes\Endpoint;
 use Dedoc\Scramble\Attributes\Group;
+use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Proovit\Billing\Actions\Invoices\CreateDraftInvoiceAction;
@@ -14,9 +16,15 @@ use Proovit\Billing\Models\Company;
 use Proovit\Billing\Models\Customer;
 use Proovit\Billing\Support\InvoiceDraftPayloadMapper;
 
-#[Group('Invoices')]
+#[Group('Invoices', description: 'Manage invoices, payments, credit notes, and public share links.')]
 final class StoreInvoiceController extends Controller
 {
+    #[Endpoint(
+        operationId: 'storeInvoice',
+        title: 'Create draft invoice',
+        description: 'Create a draft invoice with customer, lines, totals, and persisted snapshots.'
+    )]
+    #[Response(status: 201, type: 'Proovit\Billing\Http\Resources\Api\Invoices\InvoiceResource', description: 'Created draft invoice with seller and customer snapshots, lines, totals, and related metadata.')]
     public function __invoke(StoreInvoiceRequest $request, CreateDraftInvoiceAction $createDraftInvoice, InvoiceDraftPayloadMapper $mapper): JsonResponse
     {
         $payload = $request->validated();
@@ -29,7 +37,7 @@ final class StoreInvoiceController extends Controller
             $customerId,
         );
 
-        return (new InvoiceResource($invoice->loadMissing(['company', 'customer', 'series', 'reservation', 'quote', 'lines', 'payments'])))->response()->setStatusCode(201);
+        return (new InvoiceResource($invoice->loadMissing(['company', 'customer', 'series', 'reservation', 'quote', 'lines', 'payments.invoice', 'payments.allocations'])))->response()->setStatusCode(201);
     }
 
     /**
