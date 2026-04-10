@@ -22,6 +22,32 @@ API controllers are grouped by concern:
 
 That grouping is reflected in Scramble through controller attributes.
 
+## Endpoint titles
+
+Each endpoint also has an explicit title and description so the Scramble sidebar and endpoint detail page read like a product manual instead of raw controller names.
+
+Examples:
+
+- `List customers`
+- `View customer`
+- `Create draft invoice`
+- `Finalize invoice`
+- `Convert quote to invoice`
+- `Package status`
+
+The title is what Scramble shows in the endpoint list, while the description explains the business intent of the operation.
+
+## Returned data
+
+Scramble response annotations are used to describe the actual payload returned by each route:
+
+- customer endpoints return a `CustomerResource`
+- invoice endpoints return an `InvoiceResource`, `PaymentResource`, `CreditNoteResource`, or a small `data` envelope for share-link operations
+- quote endpoints return a `QuoteResource` or an `InvoiceResource` when a quote is converted
+- the system endpoint returns a compact status object with `loaded`, `locale`, and `version`
+
+This keeps the generated API docs aligned with the real JSON returned by the controllers.
+
 ## Installer behavior
 
 The installer can:

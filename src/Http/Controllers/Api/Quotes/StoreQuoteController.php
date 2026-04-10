@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Proovit\Billing\Http\Controllers\Api\Quotes;
 
 use Dedoc\Scramble\Attributes\Group;
+use Dedoc\Scramble\Attributes\Endpoint;
+use Dedoc\Scramble\Attributes\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Routing\Controller;
 use Proovit\Billing\Actions\Quotes\CreateQuoteAction;
@@ -14,9 +16,15 @@ use Proovit\Billing\Models\Company;
 use Proovit\Billing\Models\Customer;
 use Proovit\Billing\Support\InvoiceDraftPayloadMapper;
 
-#[Group('Quotes')]
+#[Group('Quotes', description: 'Manage quotes and quote-to-invoice conversion.')]
 final class StoreQuoteController extends Controller
 {
+    #[Endpoint(
+        operationId: 'storeQuote',
+        title: 'Create quote',
+        description: 'Create a new draft quote with customer, lines, and totals.'
+    )]
+    #[Response(status: 201, type: 'Proovit\Billing\Http\Resources\Api\Quotes\QuoteResource', description: 'Created quote with company, customer, lines, and totals.')]
     public function __invoke(StoreQuoteRequest $request, CreateQuoteAction $createQuoteAction, InvoiceDraftPayloadMapper $mapper): JsonResponse
     {
         $payload = array_merge($request->validated(), ['type' => 'quote']);
