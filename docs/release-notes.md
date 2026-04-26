@@ -1,5 +1,9 @@
 # Release Notes
 
+## 1.0.7
+
+- Backfilled UUID identifiers for existing billing records so historical invoices, quotes, payments, and related resources keep resolving Filament URLs
+
 ## 1.0.6
 
 - Improved Scramble response schemas so API documentation shows the real JSON payloads

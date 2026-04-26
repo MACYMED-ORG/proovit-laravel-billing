@@ -140,6 +140,10 @@ The fluent builder is the recommended public API for applications that do not wa
 
 ## Release notes
 
+### 1.0.7
+
+- Backfilled UUID identifiers for existing billing records so historical invoices, quotes, payments, and related resources keep resolving Filament URLs
+
 ### 1.0.6
 
 - Improved Scramble response schemas so API documentation shows the real JSON payloads
@@ -175,10 +179,9 @@ The fluent builder is the recommended public API for applications that do not wa
 
 ## Release notes
 
-### 1.0.6
+### 1.0.7
 
-- Improved Scramble response schemas so API documentation shows the real JSON payloads
-- Added clearer API and documentation wiring for the billing panel
+- Backfilled UUID identifiers for existing billing records so historical invoices, quotes, payments, and related resources keep resolving Filament URLs
 
 ## Acknowledgements
 
