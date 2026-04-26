@@ -154,23 +154,19 @@ final class BillingServiceProvider extends ServiceProvider
         ]);
 
         $config->expose(
-            ui: function (Router $router, mixed $action) use ($config, $apiName) {
-                return $router->get((string) config('billing.docs.ui_path', 'docs/api/billing'), function (Generator $generator) use ($config) {
-                    /** @var view-string $docsView */
-                    $docsView = 'scramble::docs';
-
-                    return view($docsView, [
-                        'spec' => $generator($config),
-                        'config' => $config,
-                    ]);
-                })->name($apiName.'.docs.ui');
-            },
-            document: function (Router $router, mixed $action) use ($config, $apiName) {
-                return $router->get((string) config('billing.docs.json_path', 'docs/api/billing.json'), function (Generator $generator) use ($config) {
-                    return response()->json($generator($config), options: JSON_PRETTY_PRINT);
-                })->name($apiName.'.docs.json');
-            }
-        );
+    ui: function (Router $router, mixed $action) use ($apiName) {
+        return $router->get(
+            (string) config('billing.docs.ui_path', 'docs/api/billing'),
+            \Proovit\Billing\Http\BillingDocsUiAction::class
+        )->name($apiName.'.docs.ui');
+    },
+    document: function (Router $router, mixed $action) use ($apiName) {
+        return $router->get(
+            (string) config('billing.docs.json_path', 'docs/api/billing.json'),
+            \Proovit\Billing\Http\BillingDocsJsonAction::class
+        )->name($apiName.'.docs.json');
+    }
+);
     }
 
     private function databaseEnabled(): bool

@@ -34,6 +34,7 @@ it('seeds a realistic billing demo dataset', function (): void {
         ->whereNotNull('public_share_token')
         ->firstOrFail();
 
+    expect($invoice->uuid_identifier)->not()->toBeEmpty();
     expect($invoice->latestPdfDocumentRender())->not()->toBeNull();
     expect(Storage::disk('public')->exists((string) $invoice->latestPdfDocumentRenderPath()))->toBeTrue();
 
